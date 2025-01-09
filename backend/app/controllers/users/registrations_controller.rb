@@ -4,4 +4,22 @@ class Users::RegistrationsController < Devise::RegistrationsController
   include RackSessionFix
   respond_to :json
 
+  private
+
+  def sign_up_params
+    params.require(:user).permit(:email, :password, :password_confirmation, :username, :bio, :first_name, :last_name)
+  end
+
+  def respond_with(resource, _opts = {})
+    if request.method == "POST" && resource.persisted?
+      render json: { message: "Signed up sucessfully.", data: resource}, status: :ok
+    elsif request.method == "DELETE"
+      render json: { message: "Account deleted successfully." }, status: :ok 
+    else
+      render json: { 
+        message: "User couldn't be created successfully.", 
+        errors: resource.errors.full_messages.to_sentence 
+      }, status: :unprocessable_entity 
+    end
+  end
 end
