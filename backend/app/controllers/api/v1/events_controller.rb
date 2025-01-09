@@ -10,9 +10,13 @@ class Api::V1::EventsController < ApplicationController
   # POST api/v1/events
   def create
     # create a new event
-    @event = Event.new()
-    render json: @events
+    event = Event.new(event_params)
 
+    if event.save
+      render json: {message: "event was added successfully", data: event}
+    else
+      render json: {message: "failed to add event", data: event.errors}
+    end
   end
 
   # SHOW api/v1/events/:id
@@ -29,4 +33,12 @@ class Api::V1::EventsController < ApplicationController
   def destroy
     # delete a single event
   end
+
+
+end
+
+private
+
+def event_params
+  params.permit(:title, :description, :start_time, :end_time, :location)
 end
