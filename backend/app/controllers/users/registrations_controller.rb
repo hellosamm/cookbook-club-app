@@ -24,9 +24,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     end
   end
 
-  # before_action :authenticate_user!, only: [:destroy]
-  # 
-  # before_action :log_authorization_header
+
   private
 
   def sign_up_params
