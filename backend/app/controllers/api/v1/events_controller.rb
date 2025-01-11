@@ -1,4 +1,5 @@
 class Api::V1::EventsController < ApplicationController
+  before_action :authenticate_user!, only: %i[create update destroy]
   before_action :set_event, only: %i[show update destroy]
 
   # GET api/v1/events
@@ -11,7 +12,8 @@ class Api::V1::EventsController < ApplicationController
   # POST api/v1/events
   def create
     # create a new event
-    @event = Event.new(event_params)
+    puts current_user.id
+    @event = Event.new(event_params.merge(user_id: current_user.id))
 
     if @event.save
       render json: {message: "event was added successfully", data: @event}
@@ -53,7 +55,7 @@ class Api::V1::EventsController < ApplicationController
   private
 
 def event_params
-  params.permit(:title, :description, :start_time, :end_time, :location)
+  params.require(:event).permit(:title, :description, :start_time, :end_time, :location)
   # params.require(:event)permit(:title, :description, :start_time, :end_time, :location)
 end
 
