@@ -322,9 +322,7 @@ Devise.setup do |config|
     ]
     jwt.revocation_requests = [
       # devise/sessions#destroy
-      ['DELETE', %r{^/users?sign_out$}],
-      # devise/registrations#destroy
-      ['DELETE', %r{^/users$}]
+      ['DELETE', %r{^/users?sign_out$}]
     ]
   end
 end

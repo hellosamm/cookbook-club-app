@@ -31,15 +31,26 @@ class Users::SessionsController < Devise::SessionsController
   # end
   
   def respond_with(resource, _opts = {})
-    if request.method == "POST" && resource.persisted?
-      render json: { message: "Logged in sucessfully.", data: resource}, status: :ok
-    elsif request.method == "DELETE"
-      render json: { message: "Logged out successfully." }, status: :ok 
+  render json: { message: "Logged in sucessfully.", data: resource}, status: :ok
+  end
+
+  def respond_to_on_destroy
+    if current_user
+      render json: { message: 'Logged out successfully'}, status: :ok
     else
-      render json: { 
-        message: "Couldn't find an actice session.", 
-        # errors: resource.errors.full_messages.to_sentence 
-      }, status: :unauthorized 
+      render json: { message: "Couldn't find an active session."}, status: :unauthorized
     end
   end
+
+  #   if request.method == "POST" && resource.persisted?
+  #     render json: { message: "Logged in sucessfully.", data: resource}, status: :ok
+  #   elsif request.method == "DELETE"
+  #     render json: { message: "Logged out successfully." }, status: :ok 
+  #   else
+  #     render json: { 
+  #       message: "Couldn't find an actice session.", 
+  #       # errors: resource.errors.full_messages.to_sentence 
+  #     }, status: :unauthorized 
+  #   end
+  # end
 end
