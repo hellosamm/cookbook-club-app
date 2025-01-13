@@ -1,6 +1,7 @@
 class Api::V1::EventsController < ApplicationController
   before_action :authenticate_user!, only: %i[create update destroy]
   before_action :set_event, only: %i[show update destroy]
+  before_action :authorize_user, only: %i[update destroy]
 
   # GET api/v1/events
   def index
@@ -13,7 +14,10 @@ class Api::V1::EventsController < ApplicationController
   def create
     # create a new event
     puts current_user.id
-    @event = Event.new(event_params.merge(user_id: current_user.id))
+    @event = current_user.events.build(event_params)
+
+    # could also be written this way 
+    # @event = Event.new(event_params.merge(user_id: current_user.id))
 
     if @event.save
       render json: {message: "event was added successfully", data: @event}
@@ -61,6 +65,13 @@ end
 
 def set_event
   @event = Event.find(params[:id])
+end
+
+def authorize_user
+  @event = Event.find(params[:id])
+  unless @event.user == current_user
+    render json: { error: "access denied"}, status: :forbidden
+  end
 end
 
 end
