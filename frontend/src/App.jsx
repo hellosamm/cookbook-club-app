@@ -1,10 +1,12 @@
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import Features from "./components/Features";
 
 function App() {
   return (
     <>
-      <Navbar name="test name" />
+      <Navbar />
+      {/* <Features /> */}
       <Footer />
     </>
   );
