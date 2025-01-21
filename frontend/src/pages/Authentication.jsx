@@ -2,6 +2,7 @@ import { React, useState } from "react";
 import PropTypes from "prop-types";
 import { validateEmail, validatePassword } from "../utilites/validations";
 import { Link } from "react-router-dom";
+import { registerApi } from "../apis/authentication";
 
 const initialErrorsState = {
   email: "",
@@ -43,21 +44,30 @@ const Authentication = ({ pageType }) => {
 
     setErrors(newErrors);
 
-    try {
-      const response = await fetch("http://localhost:3000/users", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
+    // const hasErrors = Object.values(errors).some((error) => error !== "");
+    // if (hasErrors) {
+    //   return;
+    // }
 
-      const result = await response.json();
-      console.log("API Response:", result);
-    } catch (error) {
-      setErrors((prevErrors) => ({
-        ...prevErrors,
-        api: "failed to submit data, try again",
-      }));
-      console.error("api error", error);
+    // if (pageType === PageType.LOGIN) {
+    //   //Login api call
+    // } else {
+    //   registerApi({
+    //     user: {
+    //       email: formData.email,
+    //       password: formData.password,
+    //     },
+    //   });
+    // }
+
+    if (pageType === PageType.LOGIN) {
+      //Login api call
+    } else {
+      const [result, error] = await registerApi({
+        user: formData,
+      });
+      console.log("result: ", result);
+      console.log("error: ", error);
     }
   };
 
@@ -66,15 +76,15 @@ const Authentication = ({ pageType }) => {
       {pageType === PageType.LOGIN ? "login" : "register"}
 
       {pageType === PageType.LOGIN ? (
-        <p>
+        <p className="mt-4">
           or,
           <Link to="/register" className="hover:text-blue-700">
             create an account
           </Link>
         </p>
       ) : (
-        <p>
-          already a user,
+        <p className="mt-4">
+          already a user?
           <Link to="/login" className="hover:text-blue-700">
             login
           </Link>
