@@ -10,13 +10,15 @@ const initialErrorsState = {
   api: "",
 };
 
+const defaultFormData = {
+  email: "",
+  password: "",
+};
+
 const Authentication = ({ pageType }) => {
   // const [email, setEmail] = useState(null);
   // const [password, setPassword] = useState(null);
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-  });
+  const [formData, setFormData] = useState(defaultFormData);
   const [errors, setErrors] = useState(initialErrorsState);
 
   const handleInputChange = (e) => {
@@ -72,6 +74,10 @@ const Authentication = ({ pageType }) => {
       });
       console.log("result: ", result);
       console.log("error: ", error);
+
+      if (result && !error) {
+        setFormData(defaultFormData);
+      }
     }
   };
 
