@@ -44,10 +44,14 @@ const Authentication = ({ pageType }) => {
 
     setErrors(newErrors);
 
-    // const hasErrors = Object.values(errors).some((error) => error !== "");
-    // if (hasErrors) {
-    //   return;
-    // }
+    const hasErrors = Object.values(newErrors).some((error) => error !== "");
+    if (hasErrors) {
+      console.log("validation failed, aborted API call");
+      console.log("validation errors:", newErrors);
+      console.log("current errors state:", errors);
+
+      return;
+    }
 
     // if (pageType === PageType.LOGIN) {
     //   //Login api call
