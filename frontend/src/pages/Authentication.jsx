@@ -63,16 +63,22 @@ const Authentication = ({ pageType }) => {
 
   return (
     <div>
-      {pageType === PageType.LOGIN ? "login or " : "register or "}
+      {pageType === PageType.LOGIN ? "login" : "register"}
 
       {pageType === PageType.LOGIN ? (
-        <Link to="/register" className="hover:text-blue-700">
-          create an account
-        </Link>
+        <p>
+          or,
+          <Link to="/register" className="hover:text-blue-700">
+            create an account
+          </Link>
+        </p>
       ) : (
-        <Link to="/login" className="hover:text-blue-700">
-          already have an account, login
-        </Link>
+        <p>
+          already a user,
+          <Link to="/login" className="hover:text-blue-700">
+            login
+          </Link>
+        </p>
       )}
 
       <div className="flex">
