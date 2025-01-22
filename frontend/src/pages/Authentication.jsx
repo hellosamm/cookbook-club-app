@@ -70,27 +70,40 @@ const Authentication = ({ pageType }) => {
 
     if (pageType === PageType.LOGIN) {
       //Login api call
-      const [result, error] = await loginApi({
+      const [result, authToken, error] = await loginApi({
         user: formData,
       });
 
-      handleResponse([result, error]);
+      checkAuthToken(authToken, error);
+      handleResponse([result, error, authToken]);
     } else {
       const [result, error] = await registerApi({
         user: formData,
       });
 
-      handleResponse([result, error]);
+      handleResponse([result, error, authToken]);
     }
   };
 
   const handleResponse = ([result, error]) => {
     console.log("result: ", result);
-    console.log("error: ", error);
+
+    if (error) {
+      console.log("error: ", error);
+    }
 
     if (result && !error) {
       // setFormData(defaultFormData);
       navigate("/profile");
+    }
+  };
+
+  const checkAuthToken = (authToken, error) => {
+    if (authToken) {
+      console.log("token received, ", authToken);
+      localStorage.setItem("authToken", authToken);
+    } else {
+      console.error("failed to retrieve token", error);
     }
   };
 

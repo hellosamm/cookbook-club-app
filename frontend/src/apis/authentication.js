@@ -11,8 +11,8 @@ export const registerApi = async (bodyObject) => {
     const response = await fetch(`${DOMAIN}/users`, requestOptions);
 
     if (response.ok) {
-      const data = await response.json();
-      return [data, ""];
+      const authToken = response.headers.get("Authorization");
+      return [data, authToken, ""];
     }
     return ["", "server side error"];
 
@@ -38,7 +38,8 @@ export const loginApi = async (bodyObject) => {
 
     if (response.ok) {
       const data = await response.json();
-      return [data, ""];
+      const authToken = response.headers.get("Authorization");
+      return [data, authToken, ""];
     }
     return ["", "server side error"];
 
