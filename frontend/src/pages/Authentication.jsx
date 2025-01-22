@@ -1,8 +1,8 @@
 import { React, useState } from "react";
 import PropTypes from "prop-types";
 import { validateEmail, validatePassword } from "../utilites/validations";
-import { Link } from "react-router-dom";
-import { registerApi } from "../apis/authentication";
+import { Link, useNavigate } from "react-router-dom";
+import { registerApi, loginApi } from "../apis/authentication";
 
 const initialErrorsState = {
   email: "",
@@ -20,6 +20,8 @@ const Authentication = ({ pageType }) => {
   // const [password, setPassword] = useState(null);
   const [formData, setFormData] = useState(defaultFormData);
   const [errors, setErrors] = useState(initialErrorsState);
+
+  const navigate = useNavigate();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -68,16 +70,27 @@ const Authentication = ({ pageType }) => {
 
     if (pageType === PageType.LOGIN) {
       //Login api call
+      const [result, error] = await loginApi({
+        user: formData,
+      });
+
+      handleResponse([result, error]);
     } else {
       const [result, error] = await registerApi({
         user: formData,
       });
-      console.log("result: ", result);
-      console.log("error: ", error);
 
-      if (result && !error) {
-        setFormData(defaultFormData);
-      }
+      handleResponse([result, error]);
+    }
+  };
+
+  const handleResponse = ([result, error]) => {
+    console.log("result: ", result);
+    console.log("error: ", error);
+
+    if (result && !error) {
+      // setFormData(defaultFormData);
+      navigate("/profile");
     }
   };
 
