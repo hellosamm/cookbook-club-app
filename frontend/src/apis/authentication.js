@@ -11,7 +11,8 @@ export const registerApi = async (bodyObject) => {
     const response = await fetch(`${DOMAIN}/users`, requestOptions);
 
     if (response.ok) {
-      const authToken = response.headers.get("Authorization");
+      const data = await response.json();
+      const authToken = response.headers.get("Authorization") || null;
       return [data, authToken, ""];
     }
     return ["", "server side error"];

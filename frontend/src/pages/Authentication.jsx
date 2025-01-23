@@ -77,7 +77,7 @@ const Authentication = ({ pageType }) => {
       checkAuthToken(authToken, error);
       handleResponse([result, error, authToken]);
     } else {
-      const [result, error] = await registerApi({
+      const [result, authToken, error] = await registerApi({
         user: formData,
       });
 
