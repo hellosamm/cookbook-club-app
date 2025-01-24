@@ -14,7 +14,7 @@ class Users::SessionsController < Devise::SessionsController
         render json: { message: "Invalid email or password." }, status: :unauthorized
       end
     else
-      Rails.logger.warn("User not found with the provided email: #{sign_in_params[:email]}")
+      Rails.logger.warn("User not found")
       render json: { message: "User not found." }, status: :unauthorized
     end
   rescue => e
@@ -22,6 +22,31 @@ class Users::SessionsController < Devise::SessionsController
     Rails.logger.error(e.backtrace.join("\n"))
     render json: { message: "An error occurred." }, status: :internal_server_error
   end
+  
+  #
+  # def create
+  #   Rails.logger.debug("Resource: #{resource.inspect}")
+  # end
+  # 
+  
+  # def create
+  #   # Attempt to find and authenticate the user based on email and password
+  #   self.resource = warden.authenticate!(auth_options)
+    
+  #   # If the authentication is successful, respond with a success message
+  #   if resource.persisted?
+  #     render json: { message: "testing login.", data: resource }, status: :ok
+  #   else
+  #     # If authentication fails (invalid email or password), return a custom error message
+  #     render json: { message: "Invalid email or password." }, status: :unauthorized
+  #   end
+
+  # rescue => e
+  #   # Handle other errors (e.g., unexpected issues)
+  #   render json: { message: e.message }, status: :unprocessable_entity
+  # end
+
+
   
 
   private
@@ -31,12 +56,22 @@ class Users::SessionsController < Devise::SessionsController
   # end
   
   # def respond_with(resource, _opts = {})
+  # Rails.logger.debug("Resource: #{resource.inspect}")
   #   if resource.persisted?
-  #     render json: { message: "Logged in sucessfully.", data: resource}, status: :ok
+  #     Rails.logger.debug("user authenticated: #{resource.inspect}")
+  #     render json: { message: "poop.", data: resource}, status: :ok
+  #   else
+  #     Rails.logger.debug("auth failed: #{resource.inspect}")
+  #     render json: { message: "poop"}, status: :unauthorized
+  #   end   
+  # end
+
+  # def respond_to_on_create
+  #   if resource.persisted?
+  #     render json: {message: "Logged in poop", data: resource}, status: :ok
   #   else
   #     render json: { message: "Invalid email or password"}, status: :unauthorized
-  #   end   
-
+  #   end
   # end
 
   def respond_to_on_destroy

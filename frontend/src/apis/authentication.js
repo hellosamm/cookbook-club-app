@@ -42,7 +42,7 @@ export const loginApi = async (bodyObject) => {
       const authToken = response.headers.get("Authorization");
       return [data, authToken, ""];
     }
-    return ["", "server side error"];
+    return [null, null, "server side error"];
 
     // Handle server errors
     // const error = await response.json().catch(() => null);
