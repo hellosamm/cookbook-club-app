@@ -7,6 +7,7 @@ import { registerApi, loginApi } from "../apis/authentication";
 const initialErrorsState = {
   email: "",
   password: "",
+  login: "",
   api: "",
 };
 
@@ -37,12 +38,10 @@ const Authentication = ({ pageType }) => {
     const newErrors = { ...initialErrorsState };
 
     if (!validateEmail(formData.email)) {
-      //show error
       newErrors.email = "invalid email";
     }
 
     if (!validatePassword(formData.password)) {
-      //show error
       newErrors.password = "invalid password";
     }
 
@@ -57,31 +56,27 @@ const Authentication = ({ pageType }) => {
       return;
     }
 
-    // if (pageType === PageType.LOGIN) {
-    //   //Login api call
-    // } else {
-    //   registerApi({
-    //     user: {
-    //       email: formData.email,
-    //       password: formData.password,
-    //     },
-    //   });
-    // }
-
     if (pageType === PageType.LOGIN) {
-      //Login api call
       const [result, authToken, error] = await loginApi({
         user: formData,
       });
 
+      // result = {message:" ", data:{}}
+      // auth token = Bearer code or null
+      // error -> "" || error message
+      console.log("result:", result);
+      console.log("authToken:", authToken);
+      console.log("error:", error);
+
       checkAuthToken(authToken, error);
-      handleResponse([result, error, authToken]);
+      handleResponse([result, error]);
+      checkForErrors([error]);
     } else {
       const [result, authToken, error] = await registerApi({
         user: formData,
       });
-
-      handleResponse([result, error, authToken]);
+      checkAuthToken(authToken, error);
+      handleResponse([result, error]);
     }
   };
 
@@ -93,7 +88,6 @@ const Authentication = ({ pageType }) => {
     }
 
     if (result && !error) {
-      // setFormData(defaultFormData);
       navigate("/profile");
     }
   };
@@ -102,9 +96,19 @@ const Authentication = ({ pageType }) => {
     if (authToken) {
       console.log("token received, ", authToken);
       localStorage.setItem("authToken", authToken);
-    } else {
-      console.error("failed to retrieve token", error);
+    } else if (authToken == null) {
+      console.error("failed to retrieve token:", error);
     }
+  };
+
+  const checkForErrors = (error) => {
+    const newErrors = { ...initialErrorsState };
+
+    if (error != "") {
+      newErrors.login = Array.isArray(error) ? error[0] : error;
+    }
+
+    setErrors(newErrors);
   };
 
   return (
@@ -138,7 +142,7 @@ const Authentication = ({ pageType }) => {
               onChange={handleInputChange}
             />
             {errors.email && (
-              <p className="text-red-600 text-sm mt-1">invalid email</p>
+              <p className="text-red-600 text-sm mt-1">{errors.email}</p>
             )}
           </div>
 
@@ -151,7 +155,10 @@ const Authentication = ({ pageType }) => {
               onChange={handleInputChange}
             />
             {errors.password && (
-              <p className="text-red-600 text-sm mt-1">invalid password</p>
+              <p className="text-red-600 text-sm mt-1">{errors.password}</p>
+            )}
+            {errors.login && (
+              <p className="text-red-600 text-sm mt-1">{errors.login}</p>
             )}
           </div>
 

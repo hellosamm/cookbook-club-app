@@ -1,10 +1,10 @@
 import { DOMAIN } from "./config";
 
-export const registerApi = async (bodyObject) => {
+export const registerApi = async (userData) => {
   const requestOptions = {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(bodyObject),
+    body: JSON.stringify(userData),
   };
 
   try {
@@ -12,10 +12,10 @@ export const registerApi = async (bodyObject) => {
 
     if (response.ok) {
       const data = await response.json();
-      const authToken = response.headers.get("Authorization") || null;
+      const authToken = response.headers.get("Authorization");
       return [data, authToken, ""];
     }
-    return ["", "server side error"];
+    return ["", "", "server side error"];
 
     // Handle server errors
     // const error = await response.json().catch(() => null);
@@ -27,22 +27,43 @@ export const registerApi = async (bodyObject) => {
   }
 };
 
-export const loginApi = async (bodyObject) => {
+export const loginApi = async (userData) => {
   const requestOptions = {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(bodyObject),
+    body: JSON.stringify(userData),
   };
 
   try {
     const response = await fetch(`${DOMAIN}/users/sign_in/`, requestOptions);
 
     if (response.ok) {
-      const data = await response.json();
+      const result = await response.json();
+      console.log("response was successful");
+
       const authToken = response.headers.get("Authorization");
-      return [data, authToken, ""];
+      console.log(authToken);
+
+      return [result, authToken, ""];
+    } else if (response.status == 401) {
+      console.log("response was unsuccessful");
+
+      const errorMessage = await response.text();
+      return [null, null, errorMessage];
     }
-    return [null, null, "server side error"];
+
+    // if (response.ok) {
+    //   const data = await response.json();
+    //   const authToken = response.headers.get("Authorization");
+    //   if (!authToken) {
+    //     const errorMessage = await response.text();
+    //     return [null, null, errorMessage];
+    //   } else {
+    //     return [data, authToken, ""];
+    //   }
+    // }
+
+    // return [null, null, "server side error"];
 
     // Handle server errors
     // const error = await response.json().catch(() => null);
@@ -50,6 +71,6 @@ export const loginApi = async (bodyObject) => {
     // return ["", errorMessage];
   } catch (error) {
     console.error("network errror: ", error);
-    return ["", `server down: ${error}`];
+    return ["", "", `server down: ${error}`];
   }
 };
