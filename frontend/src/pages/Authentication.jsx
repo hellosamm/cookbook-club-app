@@ -75,8 +75,17 @@ const Authentication = ({ pageType }) => {
       const [result, authToken, error] = await registerApi({
         user: formData,
       });
+
+      // result = {message:" ", data:{}}
+      // auth token = Bearer code or null
+      // error -> "" || error message
+      console.log("result:", result);
+      console.log("authToken:", authToken);
+      console.log("error:", error);
+
       checkAuthToken(authToken, error);
       handleResponse([result, error]);
+      checkForErrors([error.message]);
     }
   };
 
