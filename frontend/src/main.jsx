@@ -1,10 +1,11 @@
-import { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import App from "./App.jsx";
-import Profile from "./components/Profile.jsx";
-import Authentication, { PageType } from "./pages/Authentication.jsx";
 import "./index.css";
+import { CookiesProvider } from "react-cookie";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createRoot } from "react-dom/client";
+import { StrictMode } from "react";
+import App from "./App.jsx";
+import Authentication, { PageType } from "./pages/Authentication.jsx";
+import Profile from "./components/Profile.jsx";
 
 const router = createBrowserRouter([
   {
@@ -29,6 +30,8 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <CookiesProvider>
+      <RouterProvider router={router} />
+    </CookiesProvider>
   </StrictMode>
 );

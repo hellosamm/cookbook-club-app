@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { validateEmail, validatePassword } from "../utilites/validations";
 import { Link, useNavigate } from "react-router-dom";
 import { registerApi, loginApi } from "../apis/authentication";
+import { useCookies } from "react-cookie";
 
 const initialErrorsState = {
   email: "",
@@ -21,6 +22,7 @@ const Authentication = ({ pageType }) => {
   // const [password, setPassword] = useState(null);
   const [formData, setFormData] = useState(defaultFormData);
   const [errors, setErrors] = useState(initialErrorsState);
+  const [cookies, setCookies] = useCookies(["jwt"]);
 
   const navigate = useNavigate();
 
@@ -49,9 +51,9 @@ const Authentication = ({ pageType }) => {
 
     const hasErrors = Object.values(newErrors).some((error) => error !== "");
     if (hasErrors) {
-      console.log("validation failed, aborted API call");
-      console.log("validation errors:", newErrors);
-      console.log("current errors state:", errors);
+      // console.log("validation failed, aborted API call");
+      // console.log("validation errors:", newErrors);
+      // console.log("current errors state:", errors);
 
       return;
     }
@@ -64,9 +66,9 @@ const Authentication = ({ pageType }) => {
       // result = {message:" ", data:{}}
       // auth token = Bearer code or null
       // error -> "" || error message
-      console.log("result:", result);
-      console.log("authToken:", authToken);
-      console.log("error:", error);
+      // console.log("result:", result);
+      // console.log("authToken:", authToken);
+      // console.log("error:", error);
 
       checkAuthToken(authToken, error);
       handleResponse([result, error]);
@@ -79,9 +81,9 @@ const Authentication = ({ pageType }) => {
       // result = {message:" ", data:{}}
       // auth token = Bearer code or null
       // error -> "" || error message
-      console.log("result:", result);
-      console.log("authToken:", authToken);
-      console.log("error:", error);
+      // console.log("result:", result);
+      // console.log("authToken:", authToken);
+      // console.log("error:", error);
 
       checkAuthToken(authToken, error);
       handleResponse([result, error]);
@@ -105,6 +107,9 @@ const Authentication = ({ pageType }) => {
     if (authToken) {
       console.log("token received, ", authToken);
       localStorage.setItem("authToken", authToken);
+      const jwt = authToken;
+      setCookies("jwt", jwt);
+      // console.log("cookies:", cookies.jwt);
     } else if (authToken == null) {
       console.error("failed to retrieve token:", error);
     }

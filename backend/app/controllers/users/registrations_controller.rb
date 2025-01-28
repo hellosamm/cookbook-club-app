@@ -15,7 +15,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
       render json: { message: "Account deleted successfully." }, status: :ok 
     else
       render json: { 
-        message: "User couldn't be created successfully.", 
+        message: "User already exists.", 
         errors: resource.errors.full_messages.to_sentence 
       }, status: :unprocessable_entity 
     end
