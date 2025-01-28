@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import { React, useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { validateEmail, validatePassword } from "../utilites/validations";
 import { Link, useNavigate } from "react-router-dom";
@@ -23,8 +23,13 @@ const Authentication = ({ pageType }) => {
   const [formData, setFormData] = useState(defaultFormData);
   const [errors, setErrors] = useState(initialErrorsState);
   const [cookies, setCookies] = useCookies(["jwt"]);
-
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (cookies.authToken) {
+      navigate("/");
+    }
+  }, []);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -33,6 +38,7 @@ const Authentication = ({ pageType }) => {
       [name]: value,
     }));
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("submitted info:", formData);
@@ -107,9 +113,9 @@ const Authentication = ({ pageType }) => {
     if (authToken) {
       console.log("token received, ", authToken);
       localStorage.setItem("authToken", authToken);
-      const jwt = authToken;
-      setCookies("jwt", jwt);
-      // console.log("cookies:", cookies.jwt);
+
+      setCookies("authToken", authToken);
+      // console.log("cookies:", cookies.authToken);
     } else if (authToken == null) {
       console.error("failed to retrieve token:", error);
     }
