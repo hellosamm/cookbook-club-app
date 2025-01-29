@@ -106,6 +106,7 @@ const Authentication = ({ pageType }) => {
 
     if (result && !error) {
       navigate("/profile");
+      window.location.reload();
     }
   };
 

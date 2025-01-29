@@ -61,7 +61,10 @@ export const loginApi = async (userData) => {
 export const logoutApi = async (authToken) => {
   const requestOptions = {
     method: "DELETE",
-    headers: { "Content-Type": "application/json", Authorization: authToken },
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: authToken,
+    },
   };
 
   try {
@@ -71,12 +74,12 @@ export const logoutApi = async (authToken) => {
       const result = await response.json();
       console.log("response was successful");
 
-      return [null, result];
+      return [result, authToken, ""];
     } else if (response.status == 401) {
       console.log("response was unsuccessful");
 
       const errorMessage = await response.json();
-      return [errorMessage];
+      return [null, authToken, errorMessage];
     }
   } catch (error) {
     console.error("network errror: ", error);
