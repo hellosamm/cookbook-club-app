@@ -6,6 +6,8 @@ import { StrictMode } from "react";
 import App from "./App.jsx";
 import Authentication, { PageType } from "./pages/Authentication.jsx";
 import Profile from "./components/Profile.jsx";
+import AllEvents from "./pages/AllEvents.jsx";
+import CreateEvent from "./pages/CreateEvent.jsx";
 
 const router = createBrowserRouter([
   {
@@ -23,6 +25,14 @@ const router = createBrowserRouter([
       {
         path: "register",
         element: <Authentication pageType={PageType.REGISTER} />,
+      },
+      {
+        path: "allEvents",
+        element: <AllEvents />,
+      },
+      {
+        path: "createEvent",
+        element: <CreateEvent />,
       },
     ],
   },
