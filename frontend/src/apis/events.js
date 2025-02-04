@@ -30,3 +30,23 @@ export const createEventApi = async (authToken, formData) => {
     return [`server down: ${error}`];
   }
 };
+
+export const viewAllEventsApi = async () => {
+  const requestOptions = {
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
+  };
+
+  try {
+    const response = await fetch(`${DOMAIN}${APIV1}/events`, requestOptions);
+
+    if (response.ok) {
+      const result = await response.json();
+
+      return [result];
+    }
+  } catch (error) {
+    console.error("network errror: ", error);
+    return [`server down: ${error}`];
+  }
+};
