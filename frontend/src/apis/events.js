@@ -15,10 +15,14 @@ export const createEventApi = async (authToken, formData) => {
 
       return [result, ""];
     } else if (response.status == 401) {
-      // } else {
       console.log("response was unsucessful");
 
       const errorMessage = await response.text();
+      return [null, errorMessage];
+    } else if (response.status == 422) {
+      console.log("response was unsucessful");
+
+      const errorMessage = await response.json();
       return [null, errorMessage];
     }
   } catch (error) {

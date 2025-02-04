@@ -4,6 +4,7 @@ import DatePicker from "react-datepicker";
 import TimePicker from "react-time-picker";
 import { createEventApi } from "../apis/events";
 import useAuth from "../hooks/useAuth";
+import { Navigate, useNavigate } from "react-router-dom";
 
 import "react-datepicker/dist/react-datepicker.css";
 import "react-time-picker/dist/TimePicker.css";
@@ -20,13 +21,17 @@ const defaultFormData = {
   description: "",
 };
 
+const initialErrorsState = "";
+
 const AddEvent = () => {
   const [formData, setFormData] = useState(defaultFormData);
   const [selectedDate, setSelectedDate] = useState(null);
   const [startTime, setStartTime] = useState(null);
   const [endTime, setEndTime] = useState(null);
   const [date, setDate] = useState(null);
+  const [errors, setErrors] = useState(initialErrorsState);
   const { loggedIn, authToken } = useAuth();
+  const navigate = useNavigate();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -42,6 +47,7 @@ const AddEvent = () => {
 
     if (!date || !startTime || !endTime) {
       console.error("Missing required field");
+      setErrors("Missing required field");
       return;
     }
 
@@ -51,13 +57,12 @@ const AddEvent = () => {
       end_time: new Date(`${date} ${endTime}`).toISOString(),
     };
 
-    console.log("formattedData:", formattedData);
-    console.log("formData", formData);
-
     const [result, error] = await createEventApi(authToken, formattedData);
 
     console.log("result:", result);
-    console.log("error:", error);
+    console.log("error:", error.message);
+
+    handleResponse([result, error]);
   };
 
   const handleDateChange = (date) => {
@@ -66,20 +71,22 @@ const AddEvent = () => {
       console.log(formattedDate);
       setDate(formattedDate);
 
-      // setSelectedDate((prevState) => ({
-      //   ...prevState,
-      // }));
       setSelectedDate(date);
     }
   };
 
-  // const handleStartTime = (time) => {
-  //   setStartTime(time);
-  // };
+  const handleResponse = ([result, error]) => {
+    console.log("result: ", result);
 
-  // const handleEndTime = (time) => {
-  //   setEndTime(time);
-  // };
+    if (error) {
+      console.log("error: ", error);
+      setErrors(error.message);
+    }
+
+    if (result && !error) {
+      navigate("/allEvents");
+    }
+  };
 
   return (
     <div>
@@ -161,6 +168,8 @@ const AddEvent = () => {
               disableClock={true}
             />
           </div>
+
+          {errors && <p className="text-red-600 text-sm mt-1">{errors}</p>}
 
           <button
             type="submit"

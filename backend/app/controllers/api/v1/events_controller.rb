@@ -22,7 +22,7 @@ class Api::V1::EventsController < ApplicationController
     if @event.save
       render json: {message: "event was added successfully", data: @event}
     else
-      render json: {message: "failed to add event", data: @event.errors}
+      render json: {message: "failed to add event, missing required field", data: @event.errors}, status: :unprocessable_entity 
     end
   end
 
