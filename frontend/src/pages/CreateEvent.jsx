@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 import DatePicker from "react-datepicker";
 import TimePicker from "react-time-picker";
+import { createEventApi } from "../apis/events";
 
 import "react-datepicker/dist/react-datepicker.css";
 import "react-time-picker/dist/TimePicker.css";
@@ -36,35 +37,21 @@ const AddEvent = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(formData);
+
+    if (!date || !startTime || !endTime) {
+      console.error("Missing required field");
+      return;
+    }
+
     formatForRails(date, startTime, endTime);
 
-    // console.log(startTime);
-    // console.log(endTime);
-    console.log("submitted info:", formData);
-  };
+    const [result, error] = await createEventApi({
+      event: formData,
+    });
 
-  const handleDateChange = (date) => {
-    if (date) {
-      const formattedDate = date.toISOString().split("T")[0];
-      console.log(formattedDate);
-      setDate(formattedDate);
-    }
-  };
-
-  // const handleStartTime = (time) => {
-  //   setStartTime(time);
-  // };
-
-  // const handleEndTime = (time) => {
-  //   setEndTime(time);
-  // };
-
-  const handleTimeChange = (time, field) => {
-    if (field == "start") {
-      setStartTime(time);
-    } else if (field == "end") {
-      setEndTime(time);
-    }
+    console.log("result:", result);
+    console.log("error:", error);
   };
 
   const formatForRails = (date, startTime, endTime) => {
@@ -80,6 +67,27 @@ const AddEvent = () => {
       end_time: formattedEndTime,
     }));
   };
+
+  const handleDateChange = (date) => {
+    if (date) {
+      const formattedDate = date.toISOString().split("T")[0];
+      console.log(formattedDate);
+      setDate(formattedDate);
+
+      // setSelectedDate((prevState) => ({
+      //   ...prevState,
+      // }));
+      setSelectedDate(date);
+    }
+  };
+
+  // const handleStartTime = (time) => {
+  //   setStartTime(time);
+  // };
+
+  // const handleEndTime = (time) => {
+  //   setEndTime(time);
+  // };
 
   return (
     <div>
@@ -131,7 +139,7 @@ const AddEvent = () => {
           <div>
             <p>start time</p>
             <TimePicker
-              onChange={(time) => handleTimeChange(time, "start")}
+              onChange={setStartTime}
               value={startTime}
               format="hh:mm a"
               disableClock={true}
@@ -141,7 +149,7 @@ const AddEvent = () => {
           <div>
             <p>end time</p>
             <TimePicker
-              onChange={(time) => handleTimeChange(time, "end")}
+              onChange={setEndTime}
               value={endTime}
               format="hh:mm a"
               disableClock={true}

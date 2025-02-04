@@ -1,29 +1,28 @@
-import { DOMAIN } from "./config";
+import { APIV1, DOMAIN } from "./config";
 
-export const submitEvent = async (userData) => {
+export const createEventApi = async (formData) => {
   const requestOptions = {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(userData),
+    body: JSON.stringify(formData),
   };
 
   try {
-    const response = await fetch(`${DOMAIN}/users`, requestOptions);
+    const response = await fetch(`${DOMAIN}${APIV1}/events`, requestOptions);
 
     if (response.ok) {
       const result = await response.json();
-      const authToken = response.headers.get("Authorization");
 
-      return [result, authToken, ""];
-    } else if (response.status == 422) {
+      return [result, ""];
+    } else if (response.status == 401) {
       // } else {
       console.log("response was unsucessful");
 
-      const errorMessage = await response.json();
-      return [null, null, errorMessage];
+      const errorMessage = await response.text();
+      return [null, errorMessage];
     }
   } catch (error) {
     console.error("network errror: ", error);
-    return ["", `server down: ${error}`];
+    return [`server down: ${error}`];
   }
 };
