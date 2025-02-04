@@ -3,6 +3,7 @@ import { useState } from "react";
 import DatePicker from "react-datepicker";
 import TimePicker from "react-time-picker";
 import { createEventApi } from "../apis/events";
+import useAuth from "../hooks/useAuth";
 
 import "react-datepicker/dist/react-datepicker.css";
 import "react-time-picker/dist/TimePicker.css";
@@ -15,9 +16,8 @@ import "react-clock/dist/Clock.css";
 
 const defaultFormData = {
   title: "",
+  location: "",
   description: "",
-  start_time: "",
-  end_time: "",
 };
 
 const AddEvent = () => {
@@ -26,6 +26,7 @@ const AddEvent = () => {
   const [startTime, setStartTime] = useState(null);
   const [endTime, setEndTime] = useState(null);
   const [date, setDate] = useState(null);
+  const { loggedIn, authToken } = useAuth();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -44,28 +45,19 @@ const AddEvent = () => {
       return;
     }
 
-    formatForRails(date, startTime, endTime);
+    const formattedData = {
+      ...formData,
+      start_time: new Date(`${date} ${startTime}`).toISOString(),
+      end_time: new Date(`${date} ${endTime}`).toISOString(),
+    };
 
-    const [result, error] = await createEventApi({
-      event: formData,
-    });
+    console.log("formattedData:", formattedData);
+    console.log("formData", formData);
+
+    const [result, error] = await createEventApi(authToken, formattedData);
 
     console.log("result:", result);
     console.log("error:", error);
-  };
-
-  const formatForRails = (date, startTime, endTime) => {
-    const formattedStartTime = new Date(`${date} ${startTime}`).toISOString();
-    const formattedEndTime = new Date(`${date} ${endTime}`).toISOString();
-
-    console.log(formattedStartTime);
-    console.log(formattedEndTime);
-
-    setFormData((prevData) => ({
-      ...prevData,
-      start_time: formattedStartTime,
-      end_time: formattedEndTime,
-    }));
   };
 
   const handleDateChange = (date) => {
@@ -102,6 +94,20 @@ const AddEvent = () => {
               type="title"
               placeholder="event title"
               value={formData.title}
+              onChange={handleInputChange}
+            />
+            {/* {errors.email && (
+              <p className="text-red-600 text-sm mt-1">{errors.email}</p>
+            )} */}
+          </div>
+
+          <div>
+            <p>event location</p>
+            <input
+              name="location"
+              type="location"
+              placeholder="event location"
+              value={formData.location}
               onChange={handleInputChange}
             />
             {/* {errors.email && (

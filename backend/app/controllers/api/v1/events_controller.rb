@@ -14,7 +14,7 @@ class Api::V1::EventsController < ApplicationController
   def create
     # create a new event
     puts current_user.id
-    @event = current_user.events.build(event_params)
+    @event = current_user.created_events.build(event_params)
 
     # could also be written this way 
     # @event = Event.new(event_params.merge(user_id: current_user.id))
