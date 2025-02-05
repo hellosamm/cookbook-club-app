@@ -38,10 +38,10 @@ const AllEvents = () => {
     fetchAllEvents();
   }, []);
 
-  const allEvents = events.map((event, index) => (
-    <div key={index}>
+  const allEvents = events.map((event) => (
+    <div id={event.id} key={event.id}>
       <div className="block  bg-ivory text-black rounded-sm py-1 px-2 hover:bg-black hover:text-white  ">
-        <Link to={`/event/${event.index}`}>{event.title}</Link>
+        <Link to={`/viewEvent/${event.id}`}>{event.title}</Link>
       </div>
     </div>
   ));

@@ -8,6 +8,7 @@ import Authentication, { PageType } from "./pages/Authentication.jsx";
 import Profile from "./components/Profile.jsx";
 import AllEvents from "./pages/AllEvents.jsx";
 import CreateEvent from "./pages/CreateEvent.jsx";
+import ViewSingleEvent from "./pages/ViewSingleEvent.jsx";
 
 const router = createBrowserRouter([
   {
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
       {
         path: "createEvent",
         element: <CreateEvent />,
+      },
+      {
+        path: "viewEvent/:id",
+        element: <ViewSingleEvent />,
       },
     ],
   },
