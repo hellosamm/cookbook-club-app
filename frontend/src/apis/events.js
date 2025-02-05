@@ -50,3 +50,27 @@ export const viewAllEventsApi = async () => {
     return [`server down: ${error}`];
   }
 };
+
+export const viewSingleEventApi = async (id) => {
+  const requestOptions = {
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
+  };
+
+  try {
+    const response = await fetch(
+      `${DOMAIN}${APIV1}/events/${id}`,
+      requestOptions
+    );
+
+    if (response.ok) {
+      const result = await response.json();
+      console.log("request was successful");
+      console.log(result);
+      return [result];
+    }
+  } catch (error) {
+    console.error("network errror: ", error);
+    return [`server down: ${error}`];
+  }
+};
