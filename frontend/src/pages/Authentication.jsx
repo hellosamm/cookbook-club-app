@@ -77,6 +77,7 @@ const Authentication = ({ pageType }) => {
       // console.log("error:", error);
 
       checkAuthToken(authToken, error);
+      handleCurrentUserData(result);
       handleResponse([result, error]);
       checkForErrors([error]);
     } else {
@@ -92,6 +93,7 @@ const Authentication = ({ pageType }) => {
       // console.log("error:", error);
 
       checkAuthToken(authToken, error);
+      handleCurrentUserData(result);
       handleResponse([result, error]);
       checkForErrors([error.message]);
     }
@@ -120,6 +122,11 @@ const Authentication = ({ pageType }) => {
     } else if (authToken == null) {
       console.error("failed to retrieve token:", error);
     }
+  };
+
+  const handleCurrentUserData = (result) => {
+    console.log(result.data);
+    localStorage.setItem("currentUserData", JSON.stringify(result.data));
   };
 
   const checkForErrors = (error) => {
