@@ -13,6 +13,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     elsif request.method == "DELETE"
       resource.destroy
       render json: { message: "Account deleted successfully." }, status: :ok 
+
     else
       render json: { 
         message: "User already exists.", 
@@ -20,4 +21,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
       }, status: :unprocessable_entity 
     end
   end
+
+  # def update
+  #   if resource.update(user_params)
+  #     render json: {message: "account updated successfully", data: resource}, status: :ok
+  #   else 
+  #     render json: {message: "failed to update your account details", errors: resource.errors.full_messages.to_sentence}, status: unprocessable_entity
+  #   end
+  # end
+
+
 end
