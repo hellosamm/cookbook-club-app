@@ -3,8 +3,10 @@ import { Link, Outlet, useNavigate, useLocation } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import { logoutApi } from "../apis/authentication";
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
+import useAuth from "../hooks/useAuth";
 
 const Navbar = () => {
+  const { currentUserData } = useAuth();
   const [cookies, setCookies, removeCookie] = useCookies([]);
   const [loggedIn, setLoggedIn] = useState(false);
   const navigate = useNavigate();
@@ -56,7 +58,7 @@ const Navbar = () => {
             {loggedIn ? (
               <Menu as="div" className="">
                 <MenuButton className="flex items-center rounded-sm py-1 px-2 ">
-                  @username
+                  {currentUserData.username || currentUserData.email}
                   <img
                     src="/public/down-arrow.png"
                     alt="Dropdown Icon"

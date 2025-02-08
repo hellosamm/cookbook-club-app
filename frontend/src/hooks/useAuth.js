@@ -24,6 +24,7 @@ const useAuth = () => {
     loggedIn,
     authToken: cookies.authToken,
     currentUserData,
+    setCurrentUserData,
   };
 };
 

@@ -33,8 +33,12 @@ const AllEvents = () => {
   return (
     <div>
       <div>
-        <p>this is a page to view all the events</p>
-        <Link to="/createEvent">create an event</Link>
+        <Link
+          to="/createEvent"
+          className="bg-black text-white rounded-full px-6 m-2"
+        >
+          create an event
+        </Link>
       </div>
       <div>{events.length > 0 ? allEvents : noEvents}</div>
     </div>

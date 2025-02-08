@@ -1,4 +1,4 @@
-import { DOMAIN } from "./config";
+import { DOMAIN, APIV1 } from "./config";
 
 export const registerApi = async (userData) => {
   const requestOptions = {
@@ -84,5 +84,35 @@ export const logoutApi = async (authToken) => {
   } catch (error) {
     console.error("network errror: ", error);
     return ["", "", `server down: ${error}`];
+  }
+};
+
+export const editUserApi = async (formData, authToken) => {
+  const requestOptions = {
+    method: "PATCH",
+    headers: { "Content-Type": "application/json", Authorization: authToken },
+    body: JSON.stringify(formData),
+  };
+
+  try {
+    const response = await fetch(
+      `${DOMAIN}${APIV1}/users/update`,
+      requestOptions
+    );
+
+    if (response.ok) {
+      const result = await response.json();
+
+      return [result, ""];
+    } else if (response.status == 422) {
+      // } else {
+      console.log("response was unsucessful");
+
+      const errorMessage = await response.json();
+      return [null, errorMessage];
+    }
+  } catch (error) {
+    console.error("network errror: ", error);
+    return ["", `server down: ${error}`];
   }
 };
