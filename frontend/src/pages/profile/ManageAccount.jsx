@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import useAuth from "../hooks/useAuth";
+import useAuth from "../../hooks/useAuth";
 import { Link, Outlet } from "react-router-dom";
-import { editUserApi } from "../apis/authentication";
+import { editUserApi } from "../../apis/authentication";
 
 const initialMessageState = "";
 

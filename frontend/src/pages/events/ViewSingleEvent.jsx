@@ -1,9 +1,9 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { viewSingleEventApi } from "../apis/events";
-import { attendeeSignUp } from "../apis/attendees";
-import useAuth from "../hooks/useAuth";
+import { viewSingleEventApi } from "../../apis/events";
+import { attendeeSignUp } from "../../apis/attendees";
+import useAuth from "../../hooks/useAuth";
 
 const ViewSingleEvent = () => {
   const { id } = useParams();

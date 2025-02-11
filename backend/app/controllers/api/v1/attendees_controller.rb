@@ -12,6 +12,18 @@ class Api::V1::AttendeesController < ApplicationController
     end
   end
 
+  def show
+
+  events = Event.joins(:attendees).where(attendees: { user_id: current_user.id }).uniq
+
+  if events.any?
+    render json: { data: events }, status: :ok
+  else
+    render json: { message: "No events found for this user" }, status: :not_found
+  end
+
+  end
+
   def destroy
   end
 

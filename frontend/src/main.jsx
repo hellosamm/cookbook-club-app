@@ -6,12 +6,12 @@ import { StrictMode } from "react";
 import App from "./App.jsx";
 import Authentication, { PageType } from "./pages/Authentication.jsx";
 import Profile from "./components/Profile.jsx";
-import AllEvents from "./pages/AllEvents.jsx";
-import CreateEvent from "./pages/CreateEvent.jsx";
-import ViewSingleEvent from "./pages/ViewSingleEvent.jsx";
-import UserCreatedEvents from "./pages/UserCreatedEvents.jsx";
-import ViewUpcomingEvents from "./pages/ViewUpcomingEvents.jsx";
-import ManageAccount from "./pages/ManageAccount.jsx";
+import AllEvents from "./pages/events/AllEvents.jsx";
+import CreateEvent from "./pages/events/CreateEvent.jsx";
+import ViewSingleEvent from "./pages/events/ViewSingleEvent.jsx";
+import UserCreatedEvents from "./pages/events/UserCreatedEvents.jsx";
+import ViewUpcomingEvents from "./pages/events/ViewUpcomingEvents.jsx";
+import ManageAccount from "./pages/profile/ManageAccount.jsx";
 
 const router = createBrowserRouter([
   {

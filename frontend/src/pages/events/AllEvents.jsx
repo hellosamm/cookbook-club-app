@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { viewAllEventsApi } from "../apis/events";
+import { viewAllEventsApi } from "../../apis/events";
 
 const AllEvents = () => {
   const [events, setEvents] = useState([]);

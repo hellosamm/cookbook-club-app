@@ -2,8 +2,8 @@ import React from "react";
 import { useState } from "react";
 import DatePicker from "react-datepicker";
 import TimePicker from "react-time-picker";
-import { createEventApi } from "../apis/events";
-import useAuth from "../hooks/useAuth";
+import { createEventApi } from "../../apis/events";
+import useAuth from "../../hooks/useAuth";
 import { Navigate, useNavigate } from "react-router-dom";
 
 import "react-datepicker/dist/react-datepicker.css";

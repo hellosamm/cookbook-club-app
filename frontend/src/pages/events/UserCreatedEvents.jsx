@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { viewAllEventsApi } from "../apis/events";
-import useAuth from "../hooks/useAuth";
+import { viewAllEventsApi } from "../../apis/events";
+import useAuth from "../../hooks/useAuth";
 
 export default function UserCreatedEvents() {
   const [events, setEvents] = useState([]);
