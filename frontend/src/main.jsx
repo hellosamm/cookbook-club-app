@@ -12,6 +12,7 @@ import ViewSingleEvent from "./pages/events/ViewSingleEvent.jsx";
 import UserCreatedEvents from "./pages/events/UserCreatedEvents.jsx";
 import ViewUpcomingEvents from "./pages/events/ViewUpcomingEvents.jsx";
 import ManageAccount from "./pages/profile/ManageAccount.jsx";
+import UpdateEvent from "./pages/events/UpdateEvent.jsx";
 
 const router = createBrowserRouter([
   {
@@ -53,6 +54,10 @@ const router = createBrowserRouter([
       {
         path: "manageAccount",
         element: <ManageAccount />,
+      },
+      {
+        path: "update/:title/event/:id",
+        element: <UpdateEvent />,
       },
     ],
   },

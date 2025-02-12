@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { showUserEvents } from "../../apis/attendees";
 import useAuth from "../../hooks/useAuth";
+import { Link } from "react-router-dom";
 
 const ViewUpcomingEvents = () => {
   const { authToken } = useAuth();
@@ -9,7 +10,7 @@ const ViewUpcomingEvents = () => {
   useEffect(() => {
     const fetchUserEvents = async () => {
       const [result] = await showUserEvents(authToken);
-      console.log(result);
+
       setUserEvents(result.data);
     };
 
@@ -17,8 +18,10 @@ const ViewUpcomingEvents = () => {
   }, []);
 
   const allEvents = userEvents.map((event) => (
-    <div className="flex ">
-      <p className="mr-7">{event.title}</p>
+    <div id={event.id} key={event.id} className="flex ">
+      <Link to={`/${event.title.replace(/\s+/g, "-")}/event/${event.id}`}>
+        {event.title}
+      </Link>
       <p className="mx-2">|</p>
       <p>{event.start_time}</p>
     </div>

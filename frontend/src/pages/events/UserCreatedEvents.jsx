@@ -26,12 +26,12 @@ export default function UserCreatedEvents() {
   const displayEvents = userCreatedEvents
     // .sort((a, b) => new Date(b.start_time) - new Date(a.start_time))
     .map((event) => (
-      <div className="flex items-center">
+      <div id={event.id} key={event.id} className="flex items-center">
         <Link>{event.title}</Link>
 
         <p className="m-2">|</p>
         <Link
-          to={`/${event.title.replace(/\s+/g, "-")}/event/${event.id}`}
+          to={`/update/${event.title.replace(/\s+/g, "-")}/event/${event.id}`}
           className="bg-white text-black rounded-full px-4 text-sm hover:bg-black
         hover:text-white"
         >
