@@ -4,16 +4,16 @@ import { viewSingleEventApi } from "../../apis/events";
 
 const UpdateEvent = () => {
   const event = useParams();
-  const [formData, setFormData] = useState();
+  const [formData, setFormData] = useState({});
 
   useEffect(() => {
     const fetchEvent = async () => {
       const [result] = await viewSingleEventApi(event.id);
+
       setFormData(result.data);
-      console.log(result.data);
     };
     fetchEvent();
-  }, []);
+  }, [event.id]);
 
   // const handleInputChange (e) => {
 
@@ -21,9 +21,11 @@ const UpdateEvent = () => {
 
   return (
     <div>
-      <h1>edit</h1>
-      <p>{event.id}</p>
-      <p>{event.title}</p>
+      <div>
+        <h1>edit</h1>
+        <p>{event.id}</p>
+        <p>{event.title}</p>
+      </div>
       <form action="">
         {/* <div className="my-5">
           <p>last name</p>

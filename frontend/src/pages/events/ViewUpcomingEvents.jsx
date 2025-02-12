@@ -19,7 +19,9 @@ const ViewUpcomingEvents = () => {
 
   const allEvents = userEvents.map((event) => (
     <div id={event.id} key={event.id} className="flex ">
-      <Link to={`/${event.title.replace(/\s+/g, "-")}/event/${event.id}`}>
+      <Link
+        to={`/update/${event.title.replace(/\s+/g, "-")}/event/${event.id}`}
+      >
         {event.title}
       </Link>
       <p className="mx-2">|</p>

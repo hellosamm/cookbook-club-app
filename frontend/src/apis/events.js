@@ -65,8 +65,8 @@ export const viewSingleEventApi = async (id) => {
 
     if (response.ok) {
       const result = await response.json();
-      console.log("request was successful");
-      console.log(result);
+      // console.log("request was successful");
+      // console.log(result);
       return [result];
     }
   } catch (error) {
