@@ -36,6 +36,15 @@ class Api::V1::EventsController < ApplicationController
     end
   end
 
+  def attendance_status
+    if current_user
+      is_attending = Attendee.exists?(event_id: params[:id], user_id: current_user.id)
+      render json: {data: is_attending}
+    else 
+      render json: {is_attending: false}
+    end
+  end
+
   # PATCH/PUT api/v1/events/:id
   def update
     # update a single event 

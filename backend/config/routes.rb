@@ -10,7 +10,9 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :attendees, only: [:create, :destroy]
       get "user_events", to: "attendees#show"
-      resources :events 
+      resources :events do
+        get 'attendance_status', on: :member
+      end
       resources :users, only: [:update]
     end
   end
