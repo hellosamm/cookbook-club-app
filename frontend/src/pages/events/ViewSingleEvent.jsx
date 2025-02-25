@@ -14,9 +14,10 @@ const ViewSingleEvent = () => {
   // const [isAttending, setIsAttending] = useState(false);
   // const [isCreator, setIsCreator] = useState(false);
   const [rsvpStatus, setRsvpStatus] = useState({
-    is_attending: false,
-    is_creator: false,
+    is_attending: null,
+    is_creator: null,
   });
+  const [loading, setLoading] = useState(true);
 
   // useEffect(() => {
   //   const fetchEvent = async () => {
@@ -44,7 +45,10 @@ const ViewSingleEvent = () => {
     };
 
     const fetchRSVPStatus = async () => {
-      if (!authToken) return;
+      if (!authToken) {
+        setLoading(false);
+        return;
+      }
 
       try {
         const [status] = await checkUserRSVP(authToken, id);

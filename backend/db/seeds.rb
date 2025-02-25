@@ -33,8 +33,10 @@ Event.create!([
   start_time: DateTime.new(2025, 3, 6, 9, 30),
   end_time: DateTime.new(2025, 3, 6, 12, 30),
   location: "Pua'ena",
-  user_id: 2}
+  user_id: 3}
 ])
+
+
 
 
 
