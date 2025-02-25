@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { viewSingleEventApi } from "../../apis/events";
+import { checkUserRSVP, viewSingleEventApi } from "../../apis/events";
 import { attendeeSignUp } from "../../apis/attendees";
 import useAuth from "../../hooks/useAuth";
 
@@ -11,6 +11,7 @@ const ViewSingleEvent = () => {
   const [event, setEvent] = useState([]);
   const [message, setMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
+  const [isAttending, setIsAttending] = useState(false);
 
   useEffect(() => {
     const fetchEvent = async () => {
@@ -20,7 +21,15 @@ const ViewSingleEvent = () => {
     };
 
     fetchEvent();
-  }, []);
+    if (authToken) {
+      const fetchRSVPStatus = async () => {
+        const [status] = await checkUserRSVP(authToken, id);
+        setIsAttending(status.data);
+        console.log(status.data);
+      };
+      fetchRSVPStatus();
+    }
+  }, [id, authToken]);
 
   const handleSignUp = async () => {
     const [result] = await attendeeSignUp(authToken, id);
@@ -54,12 +63,14 @@ const ViewSingleEvent = () => {
         <p className="m-2">|</p>
         <p className="m-2">{event.start_time}</p>
         <p className="m-2">|</p>
-        <button
-          onClick={handleSignUp}
-          className="bg-black text-white rounded-full px-6 m-2"
-        >
-          RSVP
-        </button>
+        {authToken && (
+          <button
+            onClick={handleSignUp}
+            className="bg-black text-white rounded-full px-6 m-2"
+          >
+            {isAttending ? "Cancel RSVP" : "RSVP"}
+          </button>
+        )}
       </div>
       <p className="m-2">{event.description}</p>
     </div>

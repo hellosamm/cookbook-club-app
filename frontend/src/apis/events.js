@@ -74,3 +74,24 @@ export const viewSingleEventApi = async (id) => {
     return [`server down: ${error}`];
   }
 };
+
+export const checkUserRSVP = async (authToken, id) => {
+  const requestOptions = {
+    method: "GET",
+    headers: { "Content-Type": "application/json", Authorization: authToken },
+  };
+
+  try {
+    const response = await fetch(
+      `${DOMAIN}${APIV1}/events/${id}/attendance_status`,
+      requestOptions
+    );
+    if (response.ok) {
+      const result = await response.json();
+      return [result];
+    }
+  } catch (error) {
+    console.error("network errror: ", error);
+    return [`server down: ${error}`];
+  }
+};
