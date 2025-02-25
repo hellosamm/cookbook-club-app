@@ -1,6 +1,6 @@
 class Api::V1::EventsController < ApplicationController
   before_action :authenticate_user!, only: %i[create update destroy]
-  before_action :set_event, only: %i[show update destroy]
+  before_action :set_event, only: %i[show update destroy attendance_status]
   before_action :authorize_user, only: %i[update destroy]
 
   # GET api/v1/events
@@ -37,11 +37,13 @@ class Api::V1::EventsController < ApplicationController
   end
 
   def attendance_status
-    if current_user
+    return render json: {attending: false, creator: false} unless current_user
+
+    if @event.user_id == current_user.id
+      render json: {attending: false, creator: true}
+    else  
       is_attending = Attendee.exists?(event_id: params[:id], user_id: current_user.id)
-      render json: {data: is_attending}
-    else 
-      render json: {is_attending: false}
+      render json: {attending: is_attending, creator: false}
     end
   end
 

@@ -11,7 +11,30 @@ const ViewSingleEvent = () => {
   const [event, setEvent] = useState([]);
   const [message, setMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
-  const [isAttending, setIsAttending] = useState(false);
+  // const [isAttending, setIsAttending] = useState(false);
+  // const [isCreator, setIsCreator] = useState(false);
+  const [rsvpStatus, setRsvpStatus] = useState({
+    is_attending: false,
+    is_creator: false,
+  });
+
+  // useEffect(() => {
+  //   const fetchEvent = async () => {
+  //     const [result] = await viewSingleEventApi(id);
+  //     setEvent(result.data);
+  //     setMessage(result.message);
+  //   };
+
+  //   fetchEvent();
+  //   if (authToken) {
+  //     const fetchRSVPStatus = async () => {
+  //       const [status] = await checkUserRSVP(authToken, id);
+  //       console.log(rsvpStatus);
+  //       setRsvpStatus(status);
+  //     };
+  //     fetchRSVPStatus();
+  //   }
+  // }, [id, authToken]);
 
   useEffect(() => {
     const fetchEvent = async () => {
@@ -20,15 +43,19 @@ const ViewSingleEvent = () => {
       setMessage(result.message);
     };
 
-    fetchEvent();
-    if (authToken) {
-      const fetchRSVPStatus = async () => {
+    const fetchRSVPStatus = async () => {
+      if (!authToken) return;
+
+      try {
         const [status] = await checkUserRSVP(authToken, id);
-        setIsAttending(status.data);
-        console.log(status.data);
-      };
-      fetchRSVPStatus();
-    }
+        console.log(status);
+        setRsvpStatus(status);
+      } catch (error) {
+        console.error("error fetching rsvp status", error);
+      }
+    };
+    fetchEvent();
+    fetchRSVPStatus();
   }, [id, authToken]);
 
   const handleSignUp = async () => {
@@ -63,12 +90,30 @@ const ViewSingleEvent = () => {
         <p className="m-2">|</p>
         <p className="m-2">{event.start_time}</p>
         <p className="m-2">|</p>
-        {authToken && (
+        {/* {authToken && (
           <button
             onClick={handleSignUp}
             className="bg-black text-white rounded-full px-6 m-2"
           >
             {isAttending ? "Cancel RSVP" : "RSVP"}
+          </button>
+        )} */}
+
+        {rsvpStatus.creator ? (
+          <button className="bg-black text-white rounded-full px-6 m-2">
+            edit
+          </button>
+        ) : rsvpStatus.attending ? (
+          <button className="bg-black text-white rounded-full px-6 m-2">
+            cancel rsvp
+          </button>
+        ) : rsvpStatus.attending === false ? (
+          <button className="bg-black text-white rounded-full px-6 m-2">
+            rsvp
+          </button>
+        ) : (
+          <button className="bg-black text-white rounded-full px-6 m-2">
+            sign in to rsvp
           </button>
         )}
       </div>

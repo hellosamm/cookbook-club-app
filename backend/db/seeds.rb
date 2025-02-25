@@ -27,6 +27,12 @@ Event.create!([
   start_time: DateTime.new(2025, 3, 27, 17, 30),
   end_time: DateTime.new(2025, 3, 27, 20, 30),
   location: "Haleiwa Beach Park",
+  user_id: 2},
+  {title: "Sunday Surf", 
+  description: "Meet up and surf with friends", 
+  start_time: DateTime.new(2025, 3, 6, 9, 30),
+  end_time: DateTime.new(2025, 3, 6, 12, 30),
+  location: "Pua'ena",
   user_id: 2}
 ])
 
