@@ -113,9 +113,9 @@ const Navbar = () => {
           </div>
         </div>
       )}
-      <div>
+      {/* <div>
         <Outlet />
-      </div>
+      </div> */}
     </div>
   );
 };

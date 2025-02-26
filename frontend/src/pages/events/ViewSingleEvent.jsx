@@ -1,12 +1,13 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { checkUserRSVP, viewSingleEventApi } from "../../apis/events";
 import { attendeeSignUp } from "../../apis/attendees";
 import useAuth from "../../hooks/useAuth";
 
 const ViewSingleEvent = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const { currentUserData, authToken } = useAuth();
   const [event, setEvent] = useState([]);
   const [message, setMessage] = useState("");
@@ -14,10 +15,9 @@ const ViewSingleEvent = () => {
   // const [isAttending, setIsAttending] = useState(false);
   // const [isCreator, setIsCreator] = useState(false);
   const [rsvpStatus, setRsvpStatus] = useState({
-    is_attending: null,
-    is_creator: null,
+    attending: null,
+    creator: null,
   });
-  const [loading, setLoading] = useState(true);
 
   // useEffect(() => {
   //   const fetchEvent = async () => {
@@ -38,35 +38,30 @@ const ViewSingleEvent = () => {
   // }, [id, authToken]);
 
   useEffect(() => {
-    const fetchEvent = async () => {
-      const [result] = await viewSingleEventApi(id);
-      setEvent(result.data);
-      setMessage(result.message);
-    };
-
-    const fetchRSVPStatus = async () => {
-      if (!authToken) {
-        setLoading(false);
-        return;
-      }
-
-      try {
-        const [status] = await checkUserRSVP(authToken, id);
-        console.log(status);
-        setRsvpStatus(status);
-      } catch (error) {
-        console.error("error fetching rsvp status", error);
-      }
-    };
     fetchEvent();
     fetchRSVPStatus();
   }, [id, authToken]);
+
+  const fetchEvent = async () => {
+    const [result] = await viewSingleEventApi(id);
+    setEvent(result.data);
+    setMessage(result.message);
+  };
+
+  const fetchRSVPStatus = async () => {
+    if (!authToken) return;
+
+    const [status] = await checkUserRSVP(authToken, id);
+    console.log(status);
+    setRsvpStatus(status);
+  };
 
   const handleSignUp = async () => {
     const [result] = await attendeeSignUp(authToken, id);
 
     console.log(result);
     setSuccessMessage(result.message);
+    fetchRSVPStatus();
   };
 
   // const allEvents = events.map((event) => (
@@ -103,25 +98,47 @@ const ViewSingleEvent = () => {
           </button>
         )} */}
 
-        {rsvpStatus.creator ? (
-          <button className="bg-black text-white rounded-full px-6 m-2">
-            edit
-          </button>
-        ) : rsvpStatus.attending ? (
-          <button className="bg-black text-white rounded-full px-6 m-2">
-            cancel rsvp
-          </button>
-        ) : rsvpStatus.attending === false ? (
-          <button className="bg-black text-white rounded-full px-6 m-2">
-            rsvp
-          </button>
-        ) : (
-          <button className="bg-black text-white rounded-full px-6 m-2">
-            sign in to rsvp
-          </button>
-        )}
+        <div>
+          {rsvpStatus.creator ? (
+            <button
+              onClick={() =>
+                navigate(
+                  `/update/${event.title.replace(/\s+/g, "-")}/event/${
+                    event.id
+                  }`
+                )
+              }
+              className="bg-black text-white rounded-full px-6 m-2"
+            >
+              edit
+            </button>
+          ) : rsvpStatus.attending ? (
+            <button
+              onClick={() => navigate("login")}
+              className="bg-black text-white rounded-full px-6 m-2"
+            >
+              cancel rsvp
+            </button>
+          ) : rsvpStatus.attending === false ? (
+            <button
+              onClick={handleSignUp}
+              className="bg-black text-white rounded-full px-6 m-2"
+            >
+              rsvp
+            </button>
+          ) : (
+            <button
+              onClick={() => navigate("login")}
+              className="bg-black text-white rounded-full px-6 m-2"
+            >
+              sign in to rsvp
+            </button>
+          )}
+        </div>
       </div>
-      <p className="m-2">{event.description}</p>
+      <div>
+        <p className="m-2">{event.description}</p>
+      </div>
     </div>
   );
 };
