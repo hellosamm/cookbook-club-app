@@ -57,11 +57,16 @@ const ViewSingleEvent = () => {
   };
 
   const handleSignUp = async () => {
-    const [result] = await attendeeSignUp(authToken, id);
+    const [result] = await attendeeSignUp(authToken, id, attendeeId);
 
     console.log(result);
     setSuccessMessage(result.message);
     fetchRSVPStatus();
+  };
+
+  const handleCancelSignUp = async () => {
+    const [result] = await attendeesCancelSignUp(authToken, id);
+    console.log(result);
   };
 
   // const allEvents = events.map((event) => (

@@ -8,8 +8,9 @@ Rails.application.routes.draw do
   
   namespace :api do
     namespace :v1 do
-      resources :attendees, only: [:create, :destroy]
+      resources :attendees, only: [:create, :destroy, :index]
       get "user_events", to: "attendees#show"
+      get "/event/:event_id/attendee", to: "attendees#index", as: "event_attendees"
       resources :events do
         get 'attendance_status', on: :member
       end
