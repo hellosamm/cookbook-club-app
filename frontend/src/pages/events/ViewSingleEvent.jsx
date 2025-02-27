@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { checkUserRSVP, viewSingleEventApi } from "../../apis/events";
-import { attendeeSignUp } from "../../apis/attendees";
+import { attendeeSignUp, cancelSignUp } from "../../apis/attendees";
 import useAuth from "../../hooks/useAuth";
 
 const ViewSingleEvent = () => {
@@ -65,7 +65,7 @@ const ViewSingleEvent = () => {
   };
 
   const handleCancelSignUp = async () => {
-    const [result] = await attendeesCancelSignUp(authToken, id);
+    const [result] = await cancelSignUp(authToken, id);
     console.log(result);
   };
 
@@ -119,7 +119,7 @@ const ViewSingleEvent = () => {
             </button>
           ) : rsvpStatus.attending ? (
             <button
-              onClick={() => navigate("login")}
+              onClick={handleCancelSignUp}
               className="bg-black text-white rounded-full px-6 m-2"
             >
               cancel rsvp
