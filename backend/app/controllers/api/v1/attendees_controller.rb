@@ -1,6 +1,6 @@
 class Api::V1::AttendeesController < ApplicationController
-  before_action :set_attendee, only: %i[destroy]
-  before_action :authorize_user, only: %i[destroy]
+  # before_action :set_attendee, only: %i[destroy]
+  # before_action :authorize_user, only: %i[destroy]
   # before_action :authenticate_user!, only: %i[destroy, create]
 
   def create
@@ -26,10 +26,16 @@ class Api::V1::AttendeesController < ApplicationController
   end
 
   def destroy
-    if @attendee.destroy 
-      render json: {message: "successfully canceled rsvp for this event", data: @attendee}
-    else
-      render json: {message: "unable to cancel your rsvp", data: @attendee.errors}
+    @attendee = Attendee.find_by(id: params[:id])
+
+    if @attendee.user_id == current_user.id 
+      if @attendee.destroy 
+        render json: {message: "successfully canceled rsvp for this event", data: @attendee}
+      else
+        render json: {message: "unable to cancel your rsvp", data: @attendee.errors}
+      end
+    else 
+      render json: {message: "Unathorized: You can only cancel your RSVP"}, status: :forbidden
     end
   end
 
