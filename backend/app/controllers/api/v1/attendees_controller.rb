@@ -51,6 +51,28 @@ class Api::V1::AttendeesController < ApplicationController
    end
   end
 
+  def list
+    @event = Event.find_by(id: params[:event_id])
+    
+
+    if @event 
+      attendees = @event.attendees.includes(:user).map do |attendee|
+        user = attendee.user
+
+        {
+          user_id: user.id,
+         first_name: user.first_name,
+          email: user.email,
+          username: user.username
+        }
+      end
+      render json: {attendees: attendees}
+    else
+      render json: {message: "attendees could not be found"}
+    end
+  end
+
+
   private
   
   def attendee_params

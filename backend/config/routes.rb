@@ -11,6 +11,7 @@ Rails.application.routes.draw do
       resources :attendees, only: [:create, :destroy, :index]
       get "user_events", to: "attendees#show"
       get "/event/:event_id/attendee", to: "attendees#index", as: "event_attendees"
+      get "/event/:event_id/allAttendees", to: "attendees#list", as: "all_attendees"
       resources :events do
         get 'attendance_status', on: :member
       end
