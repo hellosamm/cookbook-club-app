@@ -66,7 +66,7 @@ class Api::V1::AttendeesController < ApplicationController
           username: user.username
         }
       end
-      render json: {attendees: attendees}
+      render json: attendees
     else
       render json: {message: "attendees could not be found"}
     end

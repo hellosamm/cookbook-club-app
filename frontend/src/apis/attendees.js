@@ -119,3 +119,26 @@ export const showUserEvents = async (authToken) => {
     return [`server down: ${error}`];
   }
 };
+
+export const showEventAttendees = async (authToken, eventId) => {
+  const requestOptions = {
+    method: "GET",
+    headers: { "Content-Type": "application/json", Authorization: authToken },
+  };
+
+  try {
+    const response = await fetch(
+      `${DOMAIN}${APIV1}/event/${eventId}/allAttendees`,
+      requestOptions
+    );
+
+    if (response.ok) {
+      const result = await response.json();
+
+      return [result];
+    }
+  } catch (error) {
+    console.error("network errror: ", error);
+    return [`server down: ${error}`];
+  }
+};

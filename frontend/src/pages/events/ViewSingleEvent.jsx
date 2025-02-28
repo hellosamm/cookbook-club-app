@@ -2,7 +2,11 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { checkUserRSVP, viewSingleEventApi } from "../../apis/events";
-import { attendeeSignUp, cancelSignUp } from "../../apis/attendees";
+import {
+  attendeeSignUp,
+  cancelSignUp,
+  showEventAttendees,
+} from "../../apis/attendees";
 import useAuth from "../../hooks/useAuth";
 
 const ViewSingleEvent = () => {
@@ -18,6 +22,7 @@ const ViewSingleEvent = () => {
     attending: null,
     creator: null,
   });
+  const [currentAttendees, setCurrentAttendees] = useState([]);
 
   // useEffect(() => {
   //   const fetchEvent = async () => {
@@ -40,7 +45,12 @@ const ViewSingleEvent = () => {
   useEffect(() => {
     fetchEvent();
     fetchRSVPStatus();
+    fetchAttendees();
   }, [id, authToken]);
+
+  useEffect(() => {
+    console.log("updated attendees array:", currentAttendees);
+  }, [currentAttendees]);
 
   const fetchEvent = async () => {
     const [result] = await viewSingleEventApi(id);
@@ -54,6 +64,15 @@ const ViewSingleEvent = () => {
     const [status] = await checkUserRSVP(authToken, id);
     console.log(status);
     setRsvpStatus(status);
+  };
+
+  const fetchAttendees = async () => {
+    const result = await showEventAttendees(authToken, id);
+    console.log("result", result);
+    console.log(result.length);
+    // const attendeesArray = result || [];
+    setCurrentAttendees(result[0]);
+    console.log("currentAttendees array", currentAttendees);
   };
 
   const handleSignUp = async () => {
@@ -70,6 +89,30 @@ const ViewSingleEvent = () => {
     setSuccessMessage(result.message);
     fetchRSVPStatus();
   };
+
+  const allAttendees = currentAttendees.map((attendee) => (
+    <div id={attendee.user_id} className="flex ">
+      <p>{attendee.first_name || "anonymous user"}</p>
+    </div>
+  ));
+
+  // const allEvents = userEvents.map((event) => (
+  //   <div id={event.id} key={event.id} className="flex ">
+  //     <Link
+  //       to={`/update/${event.title.replace(/\s+/g, "-")}/event/${event.id}`}
+  //     >
+  //       {event.title}
+  //     </Link>
+  //     <p className="mx-2">|</p>
+  //     <p>{event.start_time}</p>
+  //   </div>
+  // ));
+
+  // const noAttendees = (
+  //   <div>
+  //     <p>you don't have any upcoming events</p>
+  //   </div>
+  // );
 
   // const allEvents = events.map((event) => (
   //   <div id={event.id} key={event.id}>
@@ -146,6 +189,8 @@ const ViewSingleEvent = () => {
       <div>
         <p className="m-2">{event.description}</p>
       </div>
+
+      {<div>{currentAttendees.length > 0 ? allAttendees : "no attendees"}</div>}
     </div>
   );
 };
