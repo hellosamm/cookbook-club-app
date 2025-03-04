@@ -190,7 +190,14 @@ const ViewSingleEvent = () => {
         <p className="m-2">{event.description}</p>
       </div>
 
-      {<div>{currentAttendees.length > 0 ? allAttendees : "no attendees"}</div>}
+      {/* {<div>{currentAttendees.length > 0 ? allAttendees : "no attendees"}</div>} */}
+      {currentAttendees.length < 1 ? (
+        <p>nobody has RSVP'd up yet</p>
+      ) : currentAttendees.length === 1 ? (
+        <p>1 person has signed up</p>
+      ) : (
+        <p>{currentAttendees.length} people have signed up</p>
+      )}
     </div>
   );
 };
