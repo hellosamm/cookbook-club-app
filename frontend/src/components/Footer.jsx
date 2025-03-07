@@ -2,10 +2,11 @@ import React from "react";
 import instagram from "/instagram.png";
 import github from "/github.png";
 import linkedin from "/linkedin.png";
+import "../style/Footer.css";
 
 const Footer = () => {
   return (
-    <div className="flex flex-col items-center">
+    <div className="footer">
       <div className="flex space-x-4 items-center">
         <a href="https://www.instagram.com/samm.bakerr/" target="blank">
           <img src={instagram} className="w-6 " />

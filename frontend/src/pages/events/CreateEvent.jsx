@@ -90,8 +90,6 @@ const AddEvent = () => {
 
   return (
     <div>
-      <p>add an event on this page</p>
-
       <div className="flex">
         <form onSubmit={handleSubmit} className="flex flex-col gap-8">
           <div>

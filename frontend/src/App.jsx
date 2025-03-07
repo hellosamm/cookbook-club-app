@@ -1,6 +1,6 @@
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-import Features from "./components/Features";
+import Features from "./components/Home";
 import { Outlet } from "react-router-dom";
 
 function App() {
@@ -8,7 +8,7 @@ function App() {
     <>
       <Navbar />
       {/* <Features /> */}
-      <main className=" bg-ivory">
+      <main>
         <Outlet />
       </main>
       <Footer />

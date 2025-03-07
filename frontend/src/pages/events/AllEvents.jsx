@@ -32,15 +32,25 @@ const AllEvents = () => {
 
   return (
     <div>
-      <div>
-        <Link
-          to="/createEvent"
-          className="bg-black text-white rounded-full px-6 m-2"
-        >
-          create an event
-        </Link>
+      <div className="flex justify-between items-center">
+        <div>
+          <h1>upcoming events</h1>
+        </div>
+        <div>
+          <Link
+            to="/createEvent"
+            className="mt-8 border border-black rounded-full px-6 m-2 py-1 hover:bg-white"
+          >
+            create an event
+          </Link>
+          <Link className="mt-8 border border-black rounded-full px-6 m-2 py-1 hover:bg-white">
+            view past events
+          </Link>
+        </div>
       </div>
-      <div>{events.length > 0 ? allEvents : noEvents}</div>
+      <div>
+        <div>{events.length > 0 ? allEvents : noEvents}</div>
+      </div>
     </div>
   );
 };

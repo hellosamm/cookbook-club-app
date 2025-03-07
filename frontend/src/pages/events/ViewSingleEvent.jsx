@@ -91,8 +91,8 @@ const ViewSingleEvent = () => {
   };
 
   const allAttendees = currentAttendees.map((attendee) => (
-    <div id={attendee.user_id} className="flex ">
-      <p>{attendee.first_name || "anonymous user"}</p>
+    <div id={attendee.user_id} key={attendee.user_id} className="flex ">
+      <p>@{attendee.first_name || "anonymous user"}</p>
     </div>
   ));
 
@@ -172,14 +172,14 @@ const ViewSingleEvent = () => {
           ) : rsvpStatus.attending === false ? (
             <button
               onClick={handleSignUp}
-              className="bg-black text-white rounded-full px-6 m-2"
+              className="bg-black text-white rounded-full px-6 m-2 hover:bg-white hover:text-black"
             >
               rsvp
             </button>
           ) : (
             <button
-              onClick={() => navigate("login")}
-              className="bg-black text-white rounded-full px-6 m-2"
+              onClick={() => navigate("/login")}
+              className="bg-black text-white rounded-full px-6 m-2 hover:bg-white hover:text-black"
             >
               sign in to rsvp
             </button>
@@ -189,15 +189,20 @@ const ViewSingleEvent = () => {
       <div>
         <p className="m-2">{event.description}</p>
       </div>
-
-      {/* {<div>{currentAttendees.length > 0 ? allAttendees : "no attendees"}</div>} */}
-      {currentAttendees.length < 1 ? (
-        <p>nobody has RSVP'd up yet</p>
-      ) : currentAttendees.length === 1 ? (
-        <p>1 person has signed up</p>
-      ) : (
-        <p>{currentAttendees.length} people have signed up</p>
-      )}
+      <div className="mt-8">
+        {authToken ? (
+          <div>
+            <p className="">attending:</p>
+            <div>{allAttendees}</div>
+          </div>
+        ) : currentAttendees.length < 1 ? (
+          <p>nobody has RSVP'd up yet</p>
+        ) : currentAttendees.length === 1 ? (
+          <p>1 person has signed up</p>
+        ) : (
+          <p>{currentAttendees.length} people have signed up</p>
+        )}
+      </div>
     </div>
   );
 };

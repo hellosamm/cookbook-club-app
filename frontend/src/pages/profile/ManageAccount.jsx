@@ -42,6 +42,7 @@ export default function ManageAccount() {
 
     setMessage(result.message);
   };
+
   return (
     <div>
       {message && <p className="text-red-600 text-sm mt-1">{message}</p>}

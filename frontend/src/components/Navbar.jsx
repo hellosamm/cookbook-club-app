@@ -48,17 +48,23 @@ const Navbar = () => {
   };
 
   return (
-    <div className=" bg-ivory">
+    <div>
       {!isForm && (
         <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-          <div className="flex justify-between py-3">
-            <Link to="/">cookbook club</Link>
-            <Link to="allEvents">events</Link>
+          <div className="flex justify-between items-center py-3">
+            <Link to="/">
+              <img
+                src="cbc-green.png"
+                alt="cbcLogo"
+                style={{ height: "10rem" }}
+              />
+            </Link>
+            <Link to="allEvents">EVENTS</Link>
 
             {loggedIn ? (
               <Menu as="div" className="">
-                <MenuButton className="flex items-center rounded-sm py-1 px-2 ">
-                  {currentUserData.username || currentUserData.email}
+                <MenuButton className="flex items-center rounded-sm py-1 px-2 uppercase">
+                  @{currentUserData.username || currentUserData.email}
                   <img
                     src="/public/down-arrow.png"
                     alt="Dropdown Icon"
@@ -72,7 +78,7 @@ const Navbar = () => {
                         className="block  bg-ivory text-black rounded-sm py-1 px-2 hover:bg-black hover:text-white  "
                         to="profile"
                       >
-                        profile
+                        Profile
                       </Link>
                     </MenuItem>
                     <MenuItem>
@@ -80,7 +86,7 @@ const Navbar = () => {
                         className="block  bg-ivory text-black rounded-sm py-1 px-2 hover:bg-black hover:text-white  "
                         to="createEvent"
                       >
-                        create event
+                        Create Event
                       </Link>
                     </MenuItem>
                     <MenuItem>
@@ -94,7 +100,7 @@ const Navbar = () => {
                           await handleLogout();
                         }}
                       >
-                        logout
+                        Logout
                       </Link>
                     </MenuItem>
                   </div>
@@ -106,7 +112,7 @@ const Navbar = () => {
                   to="login"
                   className="bg-ivory text-black rounded-sm py-1 px-2 hover:bg-black hover:text-white"
                 >
-                  login
+                  Login
                 </Link>
               </div>
             )}

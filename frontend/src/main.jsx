@@ -13,12 +13,17 @@ import UserCreatedEvents from "./pages/events/UserCreatedEvents.jsx";
 import ViewUpcomingEvents from "./pages/events/ViewUpcomingEvents.jsx";
 import ManageAccount from "./pages/profile/ManageAccount.jsx";
 import UpdateEvent from "./pages/events/UpdateEvent.jsx";
+import Home from "./components/Home.jsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
     children: [
+      {
+        index: true,
+        element: <Home />,
+      },
       {
         path: "profile",
         element: <Profile />,
