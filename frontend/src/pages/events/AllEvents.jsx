@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { viewAllEventsApi } from "../../apis/events";
+import "../../style/AllEvents.css";
 
 const AllEvents = () => {
   const [events, setEvents] = useState([]);
@@ -16,10 +17,20 @@ const AllEvents = () => {
 
   const allEvents = events.map((event) => (
     <div id={event.id} key={event.id}>
-      <div className="block  bg-ivory text-black rounded-sm py-1 px-2 hover:bg-black hover:text-white  ">
-        <Link to={`/${event.title.replace(/\s+/g, "-")}/event/${event.id}`}>
-          {event.title}
-        </Link>
+      <div>
+        <div className="image-container"></div>
+        <div className="individual-event">
+          <div className="event-name">
+            <Link to={`/${event.title.replace(/\s+/g, "-")}/event/${event.id}`}>
+              {event.title}
+            </Link>
+          </div>
+          <div className="date-time">
+            <p>thursday, month 9th | 4:30 pm</p>
+          </div>
+          <p>{event.location}</p>
+          <p>6 attending</p>
+        </div>
       </div>
     </div>
   ));
@@ -32,7 +43,7 @@ const AllEvents = () => {
 
   return (
     <div>
-      <div className="flex justify-between items-center">
+      <div>
         <div>
           <h1>upcoming events</h1>
         </div>
@@ -48,8 +59,9 @@ const AllEvents = () => {
           </Link>
         </div>
       </div>
-      <div>
-        <div>{events.length > 0 ? allEvents : noEvents}</div>
+
+      <div className="all-events">
+        {events.length > 0 ? allEvents : noEvents}{" "}
       </div>
     </div>
   );

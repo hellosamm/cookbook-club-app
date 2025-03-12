@@ -3,11 +3,12 @@ import instagram from "/instagram.png";
 import github from "/github.png";
 import linkedin from "/linkedin.png";
 import "../style/Footer.css";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
     <div className="footer">
-      <div className="flex space-x-4 items-center">
+      {/* <div className="flex space-x-4 items-center">
         <a href="https://www.instagram.com/samm.bakerr/" target="blank">
           <img src={instagram} className="w-6 " />
         </a>
@@ -36,6 +37,22 @@ const Footer = () => {
           </svg>
         </div>
         <p>made by samm 2025</p>
+      </div> */}
+
+      <div className="footer-columns">
+        <div>
+          <p>Cookbook Club</p>
+        </div>
+        <div className="right-column">
+          <div className="stacked-items">
+            <Link>About Us</Link>
+            <Link to={"AllEvents"}>Find an Event</Link>
+          </div>
+          <div className="stacked-items">
+            <Link>Manage Your Account</Link>
+            <Link>Create an Event</Link>
+          </div>
+        </div>
       </div>
     </div>
   );

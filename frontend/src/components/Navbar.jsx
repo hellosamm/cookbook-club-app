@@ -108,12 +108,7 @@ const Navbar = () => {
               </Menu>
             ) : (
               <div className="">
-                <Link
-                  to="login"
-                  className="bg-ivory text-black rounded-sm py-1 px-2 hover:bg-black hover:text-white"
-                >
-                  Login
-                </Link>
+                <Link to="login">Login</Link>
               </div>
             )}
           </div>
