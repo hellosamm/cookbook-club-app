@@ -1,6 +1,9 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
+  const navigate = useNavigate();
+
   return (
     <div>
       <div className="relative flex justify-center items-center">
@@ -9,7 +12,10 @@ const Home = () => {
             <p>where food meets</p>
             <p>friendship</p>
           </div>
-          <button className="mt-5 text-sm md:text-l lg:text-xl text-[#828F25] rounded-[1.5625rem] border-[3px] border-[#828F25] bg-[#FBF9EC] px-6 py-2 ">
+          <button
+            className="mt-5 text-sm md:text-l lg:text-xl text-[#828F25] rounded-[1.5625rem] border-[3px] border-[#828F25] bg-[#FBF9EC] px-6 py-2 "
+            onClick={() => navigate("/AllEvents")}
+          >
             find an event near you
           </button>
         </div>
