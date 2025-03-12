@@ -1,0 +1,12 @@
+.fullPage {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+}
+
+.leftColumn {
+  background: white;
+}
+
+.leftColumn h2 {
+  font-size: 20px;
+}

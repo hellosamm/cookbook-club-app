@@ -8,16 +8,16 @@ const initialMessageState = "";
 
 const Profile = () => {
   return (
-    <div>
+    <div className={styles.fullPage}>
       <div className={styles.leftColumn}>
         <Link to="/profile/manageAccount">
-          <h1>manage your account</h1>
+          <h2>manage your account</h2>
         </Link>
         <Link to="/profile/manageEvents">
-          <h1>manage your events</h1>
+          <h2>manage your events</h2>
         </Link>
         <Link to="/profile/upcomingEvents">
-          <h1>upcoming events</h1>
+          <h2>upcoming events</h2>
         </Link>
       </div>
       <div>

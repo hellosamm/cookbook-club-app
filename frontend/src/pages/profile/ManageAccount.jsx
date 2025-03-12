@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import { Link, Outlet } from "react-router-dom";
 import { editUserApi } from "../../apis/authentication";
+import styles from "../../style/ManageAccount.module.css";
 
 const initialMessageState = "";
 
@@ -44,68 +45,65 @@ export default function ManageAccount() {
   };
 
   return (
-    <div>
-      {message && <p className="text-red-600 text-sm mt-1">{message}</p>}
-      <div className="flex">
-        <form onSubmit={handleSubmit}>
-          {/* <div className="my-5">
-            <p>email</p>
-            <input
-              name="email"
-              type="email"
-              placeholder="email"
-              value={formData.email}
-              onChange={handleInputChange}
-            />
-          </div> */}
-          <div className="my-5">
-            <p>first name</p>
+    <div className={styles.fullPage}>
+      <div>
+        <div className={styles.header}>
+          <h1>Update Your Account</h1>
+          <button onClick={handleSubmit} id="button-2">
+            save profile
+          </button>
+        </div>
+        <form onSubmit={handleSubmit} className={styles.form}>
+          <div className={styles.inputBlock}>
+            <h2>First Name</h2>
             <input
               name="first_name"
               type="first_name"
-              placeholder="first name"
+              placeholder="First Name"
               value={formData.first_name}
               onChange={handleInputChange}
+              className={styles.inputField}
             />
           </div>
-          <div className="my-5">
-            <p>last name</p>
+          <div className={styles.inputBlock}>
+            <h2>Last Name</h2>
             <input
               name="last_name"
               type="last_name"
-              placeholder="last name"
+              placeholder="Last Name"
               value={formData.last_name}
               onChange={handleInputChange}
+              className={styles.inputField}
             />
           </div>
-          <div className="my-5">
-            <p>username</p>
+          <div className={styles.inputBlock}>
+            <h2>Username</h2>
             <input
               name="username"
               type="username"
-              placeholder="username"
+              placeholder="Username"
               value={formData.username}
               onChange={handleInputChange}
+              className={styles.inputField}
             />
           </div>
-          <div className="my-5">
-            <p>bio</p>
+          <div className={styles.inputBlock}>
+            <div>
+              <h2>Bio</h2>
+              <p>Write a little snippet about yourself</p>
+            </div>
             <textarea
               name="bio"
               type="bio"
-              placeholder="bio"
+              placeholder="Bio"
               value={formData.bio}
               onChange={handleInputChange}
-              style={{ width: "500px", height: "100px" }}
+              className={styles.inputField}
+              // style={{ width: "500px", height: "100px" }}
             />
           </div>
-          <button
-            type="submit"
-            className="black white rounded-sm py-1 px-2 hover:bg-black hover:text-white"
-          >
-            save profile
-          </button>
         </form>
+        {message && <p className={styles.errors}>{message}</p>}
       </div>
     </div>
   );
