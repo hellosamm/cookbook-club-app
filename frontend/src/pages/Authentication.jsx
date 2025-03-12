@@ -4,6 +4,7 @@ import { validateEmail, validatePassword } from "../utilites/validations";
 import { Link, useNavigate } from "react-router-dom";
 import { registerApi, loginApi } from "../apis/authentication";
 import { useCookies } from "react-cookie";
+import styles from "../style/Authentication.module.css";
 
 const initialErrorsState = {
   email: "",
@@ -140,64 +141,63 @@ const Authentication = ({ pageType }) => {
   };
 
   return (
-    <div className="flex-1 flex-col justify-center ">
+    <div className={styles.fullPage}>
       <div>
-        {pageType === PageType.LOGIN ? (
-          <h1 style={{ fontSize: "20px" }}>login</h1>
-        ) : (
-          <h1>register</h1>
-        )}
+        <img
+          src="./tablescape.jpeg"
+          alt="decorative tablescape"
+          className={styles.image}
+        />
       </div>
+      <div className={styles.rightColumn}>
+        <div className={styles.header}>
+          {pageType === PageType.LOGIN ? <h1>Sign In</h1> : <h1>register</h1>}
+        </div>
 
-      {pageType === PageType.LOGIN ? (
-        <Link to="/register" className="hover:text-blue-700">
-          or, create an account
-        </Link>
-      ) : (
-        <p className="mt-4">
-          already a user?
-          <Link to="/login" className="hover:text-blue-700">
-            login
-          </Link>
-        </p>
-      )}
-
-      <div className="flex">
-        <form onSubmit={handleSubmit} className="flex flex-col gap-8">
-          <div>
+        <form onSubmit={handleSubmit}>
+          <div className={styles.inputBlock}>
+            {/* <p>Email Address</p> */}
             <input
               name="email"
               type="email"
-              placeholder="enter email"
+              placeholder="Email Address"
               value={formData.email}
               onChange={handleInputChange}
+              className={styles.inputField}
             />
-            {errors.email && (
-              <p className="text-red-600 text-sm mt-1">{errors.email}</p>
-            )}
+            {errors.email && <p className={styles.error}>{errors.email}</p>}
           </div>
-
-          <div>
+          <div className={styles.inputBlock}>
+            {/* <p>Password</p> */}
             <input
               name="password"
               type="password"
-              placeholder="enter password"
+              placeholder="Password"
               value={formData.password}
               onChange={handleInputChange}
+              className={styles.inputField}
             />
             {errors.password && (
-              <p className="text-red-600 text-sm mt-1">{errors.password}</p>
+              <p className={styles.error}>{errors.password}</p>
             )}
-            {errors.login && (
-              <p className="text-red-600 text-sm mt-1">{errors.login}</p>
-            )}
+            {errors.login && <p className={styles.error}>{errors.login}</p>}
           </div>
-
           <div>
-            <button type="submit" id="button-2">
+            <button type="submit" id="button-2" className={styles.button}>
               {pageType === PageType.LOGIN ? "Login" : "Register"}
             </button>
           </div>
+          {pageType === PageType.LOGIN ? (
+            <div className={styles.alternativeAuthentication}>
+              <p>Don't have an account? </p>
+              <Link to="/register">Sign Up</Link>
+            </div>
+          ) : (
+            <div className={styles.alternativeAuthentication}>
+              <p>Already a user?</p>
+              <Link to="/login">Login</Link>
+            </div>
+          )}
         </form>
       </div>
     </div>

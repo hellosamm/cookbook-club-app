@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { viewAllEventsApi } from "../../apis/events";
-import "../../style/AllEvents.css";
+// import "../../style/AllEvents.css";
+import styles from "../../style/AllEvents.module.css";
 import "../../App.css";
 
 const AllEvents = () => {
@@ -21,16 +22,16 @@ const AllEvents = () => {
     <div id={event.id} key={event.id}>
       <Link to={`/${event.title.replace(/\s+/g, "-")}/event/${event.id}`}>
         <div>
-          <div className="image-container"></div>
-          <div className="individual-event">
-            <div className="event-name">
-              <p className="title">{event.title}</p>
+          <div className={styles.imageContainer}></div>
+          <div className={styles.individualEvents}>
+            <div>
+              <p className={styles.title}>{event.title}</p>
             </div>
-            <div className="date-time">
+            <div className={styles.dateTime}>
               <p>thursday, month 9th | 4:30 pm</p>
             </div>
             <p>{event.location}</p>
-            <p className="attending">6 attending</p>
+            <p className={styles.attending}>6 attending</p>
           </div>
         </div>
       </Link>
@@ -44,8 +45,8 @@ const AllEvents = () => {
   );
 
   return (
-    <div className="full-page">
-      <div className="header">
+    <div className={styles.fullPage}>
+      <div className={styles.header}>
         <h1>upcoming events</h1>
         <div>
           <Link to="/createEvent" id="button-2">
@@ -54,7 +55,7 @@ const AllEvents = () => {
         </div>
       </div>
 
-      <div className="all-events">
+      <div className={styles.allEvents}>
         {events.length > 0 ? allEvents : noEvents}{" "}
       </div>
     </div>
