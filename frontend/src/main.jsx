@@ -27,6 +27,20 @@ const router = createBrowserRouter([
       {
         path: "profile",
         element: <Profile />,
+        children: [
+          {
+            path: "manageAccount",
+            element: <ManageAccount />,
+          },
+          {
+            path: "manageEvents",
+            element: <UserCreatedEvents />,
+          },
+          {
+            path: "upcomingEvents",
+            element: <ViewUpcomingEvents />,
+          },
+        ],
       },
       {
         path: "login",
@@ -48,18 +62,7 @@ const router = createBrowserRouter([
         path: "/:title/event/:id",
         element: <ViewSingleEvent />,
       },
-      {
-        path: "manageEvents",
-        element: <UserCreatedEvents />,
-      },
-      {
-        path: "upcomingEvents",
-        element: <ViewUpcomingEvents />,
-      },
-      {
-        path: "manageAccount",
-        element: <ManageAccount />,
-      },
+
       {
         path: "update/:title/event/:id",
         element: <UpdateEvent />,

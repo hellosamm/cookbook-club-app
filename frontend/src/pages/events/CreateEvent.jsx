@@ -5,11 +5,13 @@ import TimePicker from "react-time-picker";
 import { createEventApi } from "../../apis/events";
 import useAuth from "../../hooks/useAuth";
 import { Navigate, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import "react-datepicker/dist/react-datepicker.css";
 import "react-time-picker/dist/TimePicker.css";
 import "react-clock/dist/Clock.css";
 import "../../App.css";
+import styles from "../../style/CreateEvent.module.css";
 
 // const initialErrorsState = {
 //   title: "",
@@ -91,44 +93,64 @@ const AddEvent = () => {
 
   return (
     <div>
-      <div className="flex">
-        <form onSubmit={handleSubmit} className="flex flex-col gap-8">
-          <div>
-            <p>event title</p>
+      <div className={styles.fullPage}>
+        <div className={styles.header}>
+          <div className={styles.leftHeader}>
+            <Link to={"/Profile"}>back</Link>
+            <h1>Create Event</h1>
+          </div>
+          <button type="submit" id="button-2" onClick={handleSubmit}>
+            save
+          </button>
+        </div>
+        <form onSubmit={handleSubmit} className={styles.form}>
+          <div className={styles.inputBlock}>
+            <h2>Event Title</h2>
             <input
               name="title"
               type="title"
-              placeholder="event title"
+              placeholder="Event Title"
               value={formData.title}
               onChange={handleInputChange}
+              className={styles.inputField}
             />
             {/* {errors.email && (
               <p className="text-red-600 text-sm mt-1">{errors.email}</p>
             )} */}
           </div>
 
-          <div>
-            <p>event location</p>
+          <div className={styles.inputBlock}>
+            <div>
+              <h2>Event Location</h2>
+              <p>provide the address for event attendees</p>
+            </div>
             <input
               name="location"
               type="location"
-              placeholder="event location"
+              placeholder="Event Location"
               value={formData.location}
               onChange={handleInputChange}
+              className={styles.inputField}
             />
             {/* {errors.email && (
               <p className="text-red-600 text-sm mt-1">{errors.email}</p>
             )} */}
           </div>
 
-          <div>
-            <p>description</p>
+          <div className={styles.inputBlock}>
+            <div>
+              <h2>Description</h2>
+              <p>
+                provide a short description about the theme and event details
+              </p>
+            </div>
             <input
               name="description"
               type="description"
-              placeholder="description of your event"
+              placeholder="Description"
               value={formData.description}
               onChange={handleInputChange}
+              className={styles.inputField}
             />
             {/* {errors.password && (
               <p className="text-red-600 text-sm mt-1">{errors.password}</p>
@@ -137,45 +159,41 @@ const AddEvent = () => {
               <p className="text-red-600 text-sm mt-1">{errors.login}</p>
             )} */}
           </div>
-          <div>
-            <p>date</p>
+          <div className={styles.inputBlock}>
+            <h2>Date</h2>
             <DatePicker
               selected={selectedDate}
               onChange={handleDateChange}
               dateFormat="yyy-MM-dd"
               minDate={new Date()}
-              placeholderText="select a date"
+              placeholderText="Select a Date"
+              className={styles.inputField}
             />
           </div>
 
-          <div>
-            <p>start time</p>
+          <div className={styles.inputBlock}>
+            <h2>Start Time</h2>
             <TimePicker
               onChange={setStartTime}
               value={startTime}
               format="hh:mm a"
               disableClock={true}
+              className={styles.inputField}
             />
           </div>
 
-          <div>
-            <p>end time</p>
+          <div className={styles.inputBlock}>
+            <h2>End Time</h2>
             <TimePicker
               onChange={setEndTime}
               value={endTime}
               format="hh:mm a"
               disableClock={true}
+              className={styles.inputField}
             />
           </div>
-
-          {errors && <p className="text-red-600 text-sm mt-1">{errors}</p>}
-
-          <div className="mb-2">
-            <button type="submit" id="button-2">
-              save
-            </button>
-          </div>
         </form>
+        {errors && <p className={styles.errors}>*{errors}</p>}
       </div>
     </div>
   );
