@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { viewAllEventsApi } from "../../apis/events";
 import "../../style/AllEvents.css";
+import "../../App.css";
 
 const AllEvents = () => {
   const [events, setEvents] = useState([]);
@@ -42,20 +43,12 @@ const AllEvents = () => {
   );
 
   return (
-    <div>
-      <div>
+    <div className="full-page">
+      <div className="header">
+        <h1>upcoming events</h1>
         <div>
-          <h1>upcoming events</h1>
-        </div>
-        <div>
-          <Link
-            to="/createEvent"
-            className="mt-8 border border-black rounded-full px-6 m-2 py-1 hover:bg-white"
-          >
+          <Link to="/createEvent" id="button-2">
             create an event
-          </Link>
-          <Link className="mt-8 border border-black rounded-full px-6 m-2 py-1 hover:bg-white">
-            view past events
           </Link>
         </div>
       </div>

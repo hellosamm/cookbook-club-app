@@ -21,3 +21,14 @@
 .date-time {
   display: flex;
 }
+
+.full-page {
+  margin: 1.25rem;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
