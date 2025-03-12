@@ -18,14 +18,22 @@ const ViewUpcomingEvents = () => {
   }, []);
 
   const allEvents = userEvents.map((event) => (
-    <div id={event.id} key={event.id} className="flex ">
-      <Link
-        to={`/update/${event.title.replace(/\s+/g, "-")}/event/${event.id}`}
-      >
-        {event.title}
+    <div id={event.id} key={event.id}>
+      <Link to={`/${event.title.replace(/\s+/g, "-")}/event/${event.id}`}>
+        <div>
+          <div className="image-container"></div>
+          <div className="individual-event">
+            <div className="event-name">
+              <p className="title">{event.title}</p>
+            </div>
+            <div className="date-time">
+              <p>thursday, month 9th | 4:30 pm</p>
+            </div>
+            <p>{event.location}</p>
+            <p className="attending">6 attending</p>
+          </div>
+        </div>
       </Link>
-      <p className="mx-2">|</p>
-      <p>{event.start_time}</p>
     </div>
   ));
 

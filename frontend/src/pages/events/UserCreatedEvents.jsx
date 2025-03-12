@@ -23,23 +23,25 @@ export default function UserCreatedEvents() {
 
   // const userCreatedEvents.sort((a, b) => new Date(b.date) - new Date(a.date))
 
-  const displayEvents = userCreatedEvents
-    // .sort((a, b) => new Date(b.start_time) - new Date(a.start_time))
-    .map((event) => (
-      <div id={event.id} key={event.id} className="flex items-center">
-        <Link>{event.title}</Link>
-
-        <p className="m-2">|</p>
-        <Link
-          to={`/update/${event.title.replace(/\s+/g, "-")}/event/${event.id}`}
-          className="bg-white text-black rounded-full px-4 text-sm hover:bg-black
-        hover:text-white"
-        >
-          {" "}
-          edit event
-        </Link>
-      </div>
-    ));
+  const displayEvents = userCreatedEvents.map((event) => (
+    <div id={event} key={event}>
+      <Link to={`/${event.title.replace(/\s+/g, "-")}/event/${event.id}`}>
+        <div>
+          <div className="image-container"></div>
+          <div className="individual-event">
+            <div className="event-name">
+              <p className="title">{event.title}</p>
+            </div>
+            <div className="date-time">
+              <p>thursday, month 9th | 4:30 pm</p>
+            </div>
+            <p>{event.location}</p>
+            <p className="attending">6 attending</p>
+          </div>
+        </div>
+      </Link>
+    </div>
+  ));
 
   const noEvents = (
     <div>

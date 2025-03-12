@@ -5,14 +5,14 @@ import { Outlet } from "react-router-dom";
 
 function App() {
   return (
-    <>
+    <div id="root-container">
       <Navbar />
       {/* <Features /> */}
       <main>
         <Outlet />
       </main>
       <Footer />
-    </>
+    </div>
   );
 }
 
