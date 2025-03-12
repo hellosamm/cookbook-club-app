@@ -158,29 +158,20 @@ const ViewSingleEvent = () => {
                   }`
                 )
               }
-              className="bg-black text-white rounded-full px-6 m-2"
+              id="button-2"
             >
               edit
             </button>
           ) : rsvpStatus.attending ? (
-            <button
-              onClick={handleCancelSignUp}
-              className="bg-black text-white rounded-full px-6 m-2"
-            >
+            <button onClick={handleCancelSignUp} id="button-2">
               cancel rsvp
             </button>
           ) : rsvpStatus.attending === false ? (
-            <button
-              onClick={handleSignUp}
-              className="bg-black text-white rounded-full px-6 m-2 hover:bg-white hover:text-black"
-            >
+            <button onClick={handleSignUp} id="button-2">
               rsvp
             </button>
           ) : (
-            <button
-              onClick={() => navigate("/login")}
-              className="bg-black text-white rounded-full px-6 m-2 hover:bg-white hover:text-black"
-            >
+            <button onClick={() => navigate("/login")} id="button-2">
               sign in to rsvp
             </button>
           )}
@@ -193,7 +184,7 @@ const ViewSingleEvent = () => {
         {authToken ? (
           <div>
             <p className="">attending:</p>
-            <div>{allAttendees}</div>
+            <p>{allAttendees}</p>
           </div>
         ) : currentAttendees.length < 1 ? (
           <p>nobody has RSVP'd up yet</p>

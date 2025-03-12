@@ -10,6 +10,7 @@ const AllEvents = () => {
   useEffect(() => {
     const fetchAllEvents = async () => {
       const [result] = await viewAllEventsApi();
+
       setEvents(result);
     };
 
@@ -18,21 +19,21 @@ const AllEvents = () => {
 
   const allEvents = events.map((event) => (
     <div id={event.id} key={event.id}>
-      <div>
-        <div className="image-container"></div>
-        <div className="individual-event">
-          <div className="event-name">
-            <Link to={`/${event.title.replace(/\s+/g, "-")}/event/${event.id}`}>
-              {event.title}
-            </Link>
+      <Link to={`/${event.title.replace(/\s+/g, "-")}/event/${event.id}`}>
+        <div>
+          <div className="image-container"></div>
+          <div className="individual-event">
+            <div className="event-name">
+              <p className="title">{event.title}</p>
+            </div>
+            <div className="date-time">
+              <p>thursday, month 9th | 4:30 pm</p>
+            </div>
+            <p>{event.location}</p>
+            <p className="attending">6 attending</p>
           </div>
-          <div className="date-time">
-            <p>thursday, month 9th | 4:30 pm</p>
-          </div>
-          <p>{event.location}</p>
-          <p>6 attending</p>
         </div>
-      </div>
+      </Link>
     </div>
   ));
 

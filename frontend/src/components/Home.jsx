@@ -19,7 +19,7 @@ const Home = () => {
           className="w-full h-auto "
         />
       </div>
-      <div className="grid grid-cols-2 bg-[#F7F6F2] pt-5 pr-2 pl-2 pb-5">
+      <div className="grid grid-cols-2 bg-[#F7F6F2] pt-3 ">
         <div>
           <img
             src="public/sm-group.jpeg"

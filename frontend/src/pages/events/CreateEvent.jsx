@@ -9,6 +9,7 @@ import { Navigate, useNavigate } from "react-router-dom";
 import "react-datepicker/dist/react-datepicker.css";
 import "react-time-picker/dist/TimePicker.css";
 import "react-clock/dist/Clock.css";
+import "../../App.css";
 
 // const initialErrorsState = {
 //   title: "",
@@ -169,12 +170,11 @@ const AddEvent = () => {
 
           {errors && <p className="text-red-600 text-sm mt-1">{errors}</p>}
 
-          <button
-            type="submit"
-            className="bg-ivory text-black rounded-sm py-1 px-2 hover:bg-black hover:text-white"
-          >
-            save
-          </button>
+          <div className="mb-2">
+            <button type="submit" id="button-2">
+              save
+            </button>
+          </div>
         </form>
       </div>
     </div>

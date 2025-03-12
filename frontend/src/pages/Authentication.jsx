@@ -193,12 +193,11 @@ const Authentication = ({ pageType }) => {
             )}
           </div>
 
-          <button
-            type="submit"
-            className="bg-ivory text-black rounded-sm py-1 px-2 hover:bg-black hover:text-white"
-          >
-            {pageType === PageType.LOGIN ? "Login" : "Register"}
-          </button>
+          <div>
+            <button type="submit" id="button-2">
+              {pageType === PageType.LOGIN ? "Login" : "Register"}
+            </button>
+          </div>
         </form>
       </div>
     </div>
