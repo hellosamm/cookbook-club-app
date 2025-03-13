@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { showUserEvents } from "../../apis/attendees";
 import useAuth from "../../hooks/useAuth";
 import { Link } from "react-router-dom";
+import styles from "../../style/ManageEvents.module.css";
 
 const ViewUpcomingEvents = () => {
   const { authToken } = useAuth();
@@ -21,16 +22,16 @@ const ViewUpcomingEvents = () => {
     <div id={event.id} key={event.id}>
       <Link to={`/${event.title.replace(/\s+/g, "-")}/event/${event.id}`}>
         <div>
-          <div className="image-container"></div>
-          <div className="individual-event">
+          <div className={styles.imageContainer}></div>
+          <div className={styles.individualEvent}>
             <div className="event-name">
-              <p className="title">{event.title}</p>
+              <p className={styles.title}>{event.title}</p>
             </div>
-            <div className="date-time">
+            <div className={styles.dateTime}>
               <p>thursday, month 9th | 4:30 pm</p>
             </div>
             <p>{event.location}</p>
-            <p className="attending">6 attending</p>
+            <p className={styles.attending}>6 attending</p>
           </div>
         </div>
       </Link>
@@ -51,7 +52,7 @@ const ViewUpcomingEvents = () => {
     //     <p>event date</p>
     //   </div>
     // </div>
-    <div>
+    <div className={styles.fullPage}>
       <h1>your upcoming events</h1>
       {<div>{allEvents.length > 0 ? allEvents : noEvents}</div>}
     </div>

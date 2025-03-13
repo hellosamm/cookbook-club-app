@@ -23,7 +23,7 @@ const AllEvents = () => {
       <Link to={`/${event.title.replace(/\s+/g, "-")}/event/${event.id}`}>
         <div>
           <div className={styles.imageContainer}></div>
-          <div className={styles.individualEvents}>
+          <div className={styles.individualEvent}>
             <div>
               <p className={styles.title}>{event.title}</p>
             </div>

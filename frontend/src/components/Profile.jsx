@@ -9,18 +9,26 @@ const initialMessageState = "";
 const Profile = () => {
   return (
     <div className={styles.fullPage}>
-      <div className={styles.leftColumn}>
-        <Link to="/profile/manageAccount">
-          <h2>manage your account</h2>
-        </Link>
-        <Link to="/profile/manageEvents">
-          <h2>manage your events</h2>
-        </Link>
-        <Link to="/profile/upcomingEvents">
-          <h2>upcoming events</h2>
-        </Link>
+      <div className={styles.header}>
+        <div className={styles.tab}>
+          <Link to="/profile/manageAccount" className={styles.tab}>
+            <h2>Manage Your Account</h2>
+          </Link>
+        </div>
+        <div className={styles.tab}>
+          <Link to="/profile/manageEvents" className={styles.tab}>
+            <h2>Manage Your Events</h2>
+            <p>(events you created)</p>
+          </Link>
+        </div>
+        <div className={styles.tab}>
+          <Link to="/profile/upcomingEvents">
+            <h2>Upcoming Events</h2>
+            <p>(events you RSVP'd to)</p>
+          </Link>
+        </div>
       </div>
-      <div>
+      <div className={styles.body}>
         <Outlet />
       </div>
     </div>

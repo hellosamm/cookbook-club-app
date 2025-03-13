@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { viewAllEventsApi } from "../../apis/events";
 import useAuth from "../../hooks/useAuth";
+import styles from "../../style/ManageEvents.module.css";
 
 export default function UserCreatedEvents() {
   const [events, setEvents] = useState([]);
@@ -27,16 +28,16 @@ export default function UserCreatedEvents() {
     <div id={event} key={event}>
       <Link to={`/${event.title.replace(/\s+/g, "-")}/event/${event.id}`}>
         <div>
-          <div className="image-container"></div>
-          <div className="individual-event">
-            <div className="event-name">
-              <p className="title">{event.title}</p>
+          <div className={styles.imageContainer}></div>
+          <div className={styles.individualEvent}>
+            <div>
+              <p className={styles.title}>{event.title}</p>
             </div>
-            <div className="date-time">
+            <div className={styles.dateTime}>
               <p>thursday, month 9th | 4:30 pm</p>
             </div>
             <p>{event.location}</p>
-            <p className="attending">6 attending</p>
+            <p className={styles.attending}>6 attending</p>
           </div>
         </div>
       </Link>
@@ -50,10 +51,11 @@ export default function UserCreatedEvents() {
   );
 
   return (
-    <div>
-      <h1>manage your events</h1>
-      <div>
-        <div>{userCreatedEvents.length > 0 ? displayEvents : noEvents}</div>
+    <div className={styles.fullPage}>
+      {/* <h1>events you created</h1> */}
+
+      <div className={styles.allEvents}>
+        {userCreatedEvents.length > 0 ? displayEvents : noEvents}
       </div>
     </div>
   );
