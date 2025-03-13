@@ -19,20 +19,18 @@ const AllEvents = () => {
   }, []);
 
   const allEvents = events.map((event) => (
-    <div id={event.id} key={event.id}>
+    <div className={styles.eventCard} id={event.id} key={event.id}>
       <Link to={`/${event.title.replace(/\s+/g, "-")}/event/${event.id}`}>
-        <div>
-          <div className={styles.imageContainer}></div>
-          <div className={styles.individualEvent}>
-            <div>
-              <p className={styles.title}>{event.title}</p>
-            </div>
-            <div className={styles.dateTime}>
-              <p>thursday, month 9th | 4:30 pm</p>
-            </div>
-            <p>{event.location}</p>
-            <p className={styles.attending}>6 attending</p>
+        <div className={styles.imageContainer}></div>
+        <div className={styles.individualEvent}>
+          <div>
+            <p className={styles.title}>{event.title}</p>
           </div>
+          <div className={styles.dateTime}>
+            <p>thursday, month 9th | 4:30 pm</p>
+          </div>
+          <p>{event.location}</p>
+          <p className={styles.attending}>6 attending</p>
         </div>
       </Link>
     </div>

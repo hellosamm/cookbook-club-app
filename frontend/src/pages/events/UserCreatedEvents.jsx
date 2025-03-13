@@ -27,7 +27,7 @@ export default function UserCreatedEvents() {
   const displayEvents = userCreatedEvents.map((event) => (
     <div id={event} key={event}>
       <Link to={`/${event.title.replace(/\s+/g, "-")}/event/${event.id}`}>
-        <div>
+        <div className={styles.eventCard}>
           <div className={styles.imageContainer}></div>
           <div className={styles.individualEvent}>
             <div>

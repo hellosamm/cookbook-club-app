@@ -20,11 +20,11 @@ const ViewUpcomingEvents = () => {
 
   const allEvents = userEvents.map((event) => (
     <div id={event.id} key={event.id}>
-      <Link to={`/${event.title.replace(/\s+/g, "-")}/event/${event.id}`}>
-        <div>
+      <div className={styles.eventCard}>
+        <Link to={`/${event.title.replace(/\s+/g, "-")}/event/${event.id}`}>
           <div className={styles.imageContainer}></div>
           <div className={styles.individualEvent}>
-            <div className="event-name">
+            <div>
               <p className={styles.title}>{event.title}</p>
             </div>
             <div className={styles.dateTime}>
@@ -33,8 +33,8 @@ const ViewUpcomingEvents = () => {
             <p>{event.location}</p>
             <p className={styles.attending}>6 attending</p>
           </div>
-        </div>
-      </Link>
+        </Link>
+      </div>
     </div>
   ));
 
@@ -53,8 +53,8 @@ const ViewUpcomingEvents = () => {
     //   </div>
     // </div>
     <div className={styles.fullPage}>
-      <h1>your upcoming events</h1>
-      {<div>{allEvents.length > 0 ? allEvents : noEvents}</div>}
+      {/* <h1>your upcoming events</h1> */}
+      {allEvents.length > 0 ? allEvents : noEvents}
     </div>
   );
 };

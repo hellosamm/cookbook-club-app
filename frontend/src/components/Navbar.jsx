@@ -54,7 +54,7 @@ const Navbar = () => {
           <div className="flex justify-between items-center py-3">
             <Link to="/">
               <img
-                src="cbc-green.png"
+                src="/cbc-green.png"
                 alt="cbcLogo"
                 style={{ height: "10rem" }}
               />
