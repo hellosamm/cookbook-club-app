@@ -1,12 +1,13 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, Link } from "react-router-dom";
 import { checkUserRSVP, viewSingleEventApi } from "../../apis/events";
 import {
   attendeeSignUp,
   cancelSignUp,
   showEventAttendees,
 } from "../../apis/attendees";
+
 import useAuth from "../../hooks/useAuth";
 
 const ViewSingleEvent = () => {
@@ -133,6 +134,7 @@ const ViewSingleEvent = () => {
       {successMessage && (
         <p className="text-red-600 text-sm mt-1">{successMessage}</p>
       )}
+      <Link to={"/allEvents"}>back</Link>
       <h1>{event.title}</h1>
       <div className="flex justify-start">
         <p className="m-2">@{event.location}</p>

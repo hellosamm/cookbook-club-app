@@ -45,10 +45,17 @@ const Footer = () => {
       <div className="footer-columns">
         <div className="left-column">
           <Link to={"/"}>Cookbook Club</Link>
+          <p>made by @samm.bakerr</p>
         </div>
+
         <div className="right-column">
           <div className="stacked-items">
-            <Link>About Us</Link>
+            <h2>Photo Credits:</h2>
+            <p>Sophie Olsen</p>
+            <p>Catherine Erickson</p>
+          </div>
+          <div className="stacked-items">
+            <Link>About</Link>
             <Link to={"AllEvents"}>Find an Event</Link>
           </div>
           <div className="stacked-items">
