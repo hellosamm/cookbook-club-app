@@ -4,8 +4,11 @@ import github from "/github.png";
 import linkedin from "/linkedin.png";
 import "../style/Footer.css";
 import { Link } from "react-router-dom";
+import useAuth from "../hooks/useAuth";
 
 const Footer = () => {
+  const { loggedIn } = useAuth();
+
   return (
     <div className="footer">
       {/* <div className="flex space-x-4 items-center">
@@ -40,8 +43,8 @@ const Footer = () => {
       </div> */}
 
       <div className="footer-columns">
-        <div>
-          <p>Cookbook Club</p>
+        <div className="left-column">
+          <Link to={"/"}>Cookbook Club</Link>
         </div>
         <div className="right-column">
           <div className="stacked-items">
@@ -49,8 +52,12 @@ const Footer = () => {
             <Link to={"AllEvents"}>Find an Event</Link>
           </div>
           <div className="stacked-items">
-            <Link>Manage Your Account</Link>
-            <Link>Create an Event</Link>
+            <Link to={loggedIn ? "/createEvent" : "/login"}>
+              Create an Event
+            </Link>
+            <Link to={loggedIn ? "/profile" : "/login"}>
+              {loggedIn ? "Manage Your Account" : "Login"}
+            </Link>
           </div>
         </div>
       </div>
