@@ -167,7 +167,7 @@ const ViewSingleEvent = () => {
           </div>
         </div>
         <div className={styles.allEventDetails}>
-          <div>
+          <div className={styles.leftColumn}>
             <div className={styles.singleDetail}>
               <h2>Location</h2>
               <p>@{event.location}</p>
@@ -192,7 +192,7 @@ const ViewSingleEvent = () => {
               <p className="m-2">{event.description}</p>
             </div>
           </div>
-          <div className="mt-8">
+          <div className={styles.rightColumn}>
             {authToken ? (
               <div className={styles.singleDetail}>
                 <div className={styles.sideBySide}>

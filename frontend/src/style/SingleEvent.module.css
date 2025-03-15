@@ -1,10 +1,11 @@
 .fullPage {
   margin: 2rem 2.5rem;
+  min-width: 800px;
+  max-width: 1400px;
 }
 
 .eventCard {
   background: white;
-
   padding: 2rem 2.5rem;
   border-radius: 0px 0px 15px 15px;
 }
@@ -19,6 +20,11 @@
 .header {
   display: flex;
   align-items: center;
+  white-space: nowrap;
+}
+
+.header h1 {
+  margin-right: 50px;
 }
 
 .header a {
@@ -39,8 +45,10 @@
 }
 
 .allEventDetails {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  margin-right: 100px;
 }
 
 .allEventDetails h2 {
@@ -50,6 +58,7 @@
 
 .singleDetail {
   margin-bottom: 2rem;
+  white-space: nowrap;
 }
 
 .sideBySide {
