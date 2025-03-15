@@ -50,7 +50,7 @@ const Navbar = () => {
   return (
     <div>
       {!isForm && (
-        <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+        <div className=" max-w-7xl px-2 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-3">
             <Link to="/">
               <img
