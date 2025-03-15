@@ -3,6 +3,7 @@ import { CookiesProvider } from "react-cookie";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { createRoot } from "react-dom/client";
 import { StrictMode } from "react";
+import { Navigate } from "react-router-dom";
 import App from "./App.jsx";
 import Authentication, { PageType } from "./pages/Authentication.jsx";
 import Profile from "./components/Profile.jsx";
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
         path: "profile",
         element: <Profile />,
         children: [
+          {
+            path: "",
+            element: <Navigate to="manageAccount" replace />,
+          },
           {
             path: "manageAccount",
             element: <ManageAccount />,

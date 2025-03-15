@@ -9,6 +9,7 @@ import {
 } from "../../apis/attendees";
 
 import useAuth from "../../hooks/useAuth";
+import styles from "../../style/SingleEvent.module.css";
 
 const ViewSingleEvent = () => {
   const { id } = useParams();
@@ -130,71 +131,86 @@ const ViewSingleEvent = () => {
   // );
 
   return (
-    <div>
-      {successMessage && (
-        <p className="text-red-600 text-sm mt-1">{successMessage}</p>
-      )}
-      <Link to={"/allEvents"}>back</Link>
-      <h1>{event.title}</h1>
-      <div className="flex justify-start">
-        <p className="m-2">@{event.location}</p>
-        <p className="m-2">|</p>
-        <p className="m-2">{event.start_time}</p>
-        <p className="m-2">|</p>
-        {/* {authToken && (
-          <button
-            onClick={handleSignUp}
-            className="bg-black text-white rounded-full px-6 m-2"
-          >
-            {isAttending ? "Cancel RSVP" : "RSVP"}
-          </button>
-        )} */}
-
-        <div>
-          {rsvpStatus.creator ? (
-            <button
-              onClick={() =>
-                navigate(
-                  `/update/${event.title.replace(/\s+/g, "-")}/event/${
-                    event.id
-                  }`
-                )
-              }
-              id="button-2"
-            >
-              edit
-            </button>
-          ) : rsvpStatus.attending ? (
-            <button onClick={handleCancelSignUp} id="button-2">
-              cancel rsvp
-            </button>
-          ) : rsvpStatus.attending === false ? (
-            <button onClick={handleSignUp} id="button-2">
-              rsvp
-            </button>
-          ) : (
-            <button onClick={() => navigate("/login")} id="button-2">
-              sign in to rsvp
-            </button>
-          )}
-        </div>
-      </div>
-      <div>
-        <p className="m-2">{event.description}</p>
-      </div>
-      <div className="mt-8">
-        {authToken ? (
+    <div className={styles.fullPage}>
+      {/* <Link to={"/allEvents"}>back</Link> */}
+      <div className={styles.image}></div>
+      <div className={styles.eventCard}>
+        <div className={styles.header}>
+          <h1>{event.title}</h1>
           <div>
-            <p className="">attending:</p>
-            <p>{allAttendees}</p>
+            {rsvpStatus.creator ? (
+              <button
+                onClick={() =>
+                  navigate(
+                    `/update/${event.title.replace(/\s+/g, "-")}/event/${
+                      event.id
+                    }`
+                  )
+                }
+                id="button-2"
+              >
+                edit
+              </button>
+            ) : rsvpStatus.attending ? (
+              <button onClick={handleCancelSignUp} id="button-2">
+                cancel rsvp
+              </button>
+            ) : rsvpStatus.attending === false ? (
+              <button onClick={handleSignUp} id="button-2">
+                rsvp
+              </button>
+            ) : (
+              <button onClick={() => navigate("/login")} id="button-2">
+                sign in to rsvp
+              </button>
+            )}
           </div>
-        ) : currentAttendees.length < 1 ? (
-          <p>nobody has RSVP'd up yet</p>
-        ) : currentAttendees.length === 1 ? (
-          <p>1 person has signed up</p>
-        ) : (
-          <p>{currentAttendees.length} people have signed up</p>
-        )}
+        </div>
+        <div className={styles.allEventDetails}>
+          <div>
+            <div className={styles.singleDetail}>
+              <h2>Location</h2>
+              <p>@{event.location}</p>
+            </div>
+            <div className={styles.singleDetail}>
+              <h2>Time</h2>
+              <p className="m-2">
+                {event.start_time} - {event.end_time}
+              </p>
+            </div>
+
+            {/* {authToken && (
+              <button
+                onClick={handleSignUp}
+                className="bg-black text-white rounded-full px-6 m-2"
+              >
+                {isAttending ? "Cancel RSVP" : "RSVP"}
+              </button>
+            )} */}
+            <div className={styles.singleDetail}>
+              <h2>Description</h2>
+              <p className="m-2">{event.description}</p>
+            </div>
+          </div>
+          <div className="mt-8">
+            {authToken ? (
+              <div className={styles.singleDetail}>
+                <div className={styles.sideBySide}>
+                  <h2>Attending</h2>
+                  <p>({currentAttendees.length})</p>
+                </div>
+                <p>{allAttendees}</p>
+              </div>
+            ) : currentAttendees.length < 1 ? (
+              <p>nobody has RSVP'd up yet</p>
+            ) : currentAttendees.length === 1 ? (
+              <p>1 person has signed up</p>
+            ) : (
+              <p>{currentAttendees.length} people have signed up</p>
+            )}
+          </div>
+          {successMessage && <p className={styles.errors}>*{successMessage}</p>}
+        </div>
       </div>
     </div>
   );

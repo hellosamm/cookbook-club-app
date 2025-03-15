@@ -2,7 +2,7 @@
   display: grid;
   grid-template-columns: 1fr 3fr;
   margin: 1rem;
-  background: ;
+  min-height: 60vh;
 }
 
 .header {
@@ -11,6 +11,7 @@
   flex-direction: column;
   width: 100%;
   background-color: #c9cf7c;
+  border-radius: 15px 0px 0px 15px;
 }
 
 .header h2 {
@@ -21,6 +22,7 @@
 
 .body {
   background-color: #e0e3b8;
+  border-radius: 0px 15px 15px 0px;
 }
 .title {
   font-weight: 500;
@@ -31,11 +33,18 @@
 }
 
 .tab {
-  padding: 15px 5px;
+  padding: 15px 20px;
+  /* margin-bottom: 10px; */
   font-size: 14px;
 }
 
 .active {
   background-color: #828f25;
+  color: white;
+}
+
+.tab.active:first-of-type {
+  background-color: #828f25;
+  border-radius: 15px 0px 0px 0px;
   color: white;
 }

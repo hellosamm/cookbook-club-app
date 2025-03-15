@@ -105,7 +105,9 @@ const AddEvent = () => {
         </div>
         <form onSubmit={handleSubmit} className={styles.form}>
           <div className={styles.inputBlock}>
-            <h2>Event Title</h2>
+            <div className={styles.leftColumn}>
+              <h2>Event Title</h2>
+            </div>
             <input
               name="title"
               type="title"
@@ -120,7 +122,7 @@ const AddEvent = () => {
           </div>
 
           <div className={styles.inputBlock}>
-            <div>
+            <div className={styles.leftColumn}>
               <h2>Event Location</h2>
               <p>provide the address for event attendees</p>
             </div>
@@ -138,11 +140,9 @@ const AddEvent = () => {
           </div>
 
           <div className={styles.inputBlock}>
-            <div>
+            <div className={styles.leftColumn}>
               <h2>Description</h2>
-              <p>
-                provide a short description about the theme and event details
-              </p>
+              <p>tell about the theme and event details</p>
             </div>
             <input
               name="description"
@@ -160,7 +160,9 @@ const AddEvent = () => {
             )} */}
           </div>
           <div className={styles.inputBlock}>
-            <h2>Date</h2>
+            <div className={styles.leftColumn}>
+              <h2>Date</h2>
+            </div>
             <DatePicker
               selected={selectedDate}
               onChange={handleDateChange}
@@ -172,7 +174,9 @@ const AddEvent = () => {
           </div>
 
           <div className={styles.inputBlock}>
-            <h2>Start Time</h2>
+            <div className={styles.leftColumn}>
+              <h2>Start Time</h2>
+            </div>
             <TimePicker
               onChange={setStartTime}
               value={startTime}
@@ -183,7 +187,9 @@ const AddEvent = () => {
           </div>
 
           <div className={styles.inputBlock}>
-            <h2>End Time</h2>
+            <div className={styles.leftColumn}>
+              <h2>End Time</h2>
+            </div>
             <TimePicker
               onChange={setEndTime}
               value={endTime}

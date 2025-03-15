@@ -50,6 +50,7 @@ const UpdateEvent = () => {
             type="text"
             // placeholder="title"
             value={formData.title}
+            className={styles.inputField}
             // onChange={handleInputChange}
           />
         </div>
