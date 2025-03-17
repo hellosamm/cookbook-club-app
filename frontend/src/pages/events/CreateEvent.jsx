@@ -92,7 +92,7 @@ const AddEvent = () => {
   };
 
   return (
-    <div>
+    <div className={styles.createEvent}>
       <div className={styles.fullPage}>
         <div className={styles.header}>
           <div className={styles.leftHeader}>
