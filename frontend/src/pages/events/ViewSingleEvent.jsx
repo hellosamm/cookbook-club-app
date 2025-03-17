@@ -202,34 +202,13 @@ const ViewSingleEvent = () => {
                   <p>{allAttendees}</p>
                 </div>
               ) : currentAttendees.length < 1 ? (
-                <div className={styles.attendingCard}>
-                  <h2>Attending</h2>
-                  <div className={styles.attendingCard}>
-                <h2>Attending</h2>
                 <p>nobody has RSVP'd up yet</p>
-                </div>
-                </div>
-            ) : currentAttendees.length === 1 ? (
-                <div>
-                  <h2>Attending</h2>
-                  <div>
-                <h2>Attending</h2>
+              ) : currentAttendees.length === 1 ? (
                 <p>1 person has signed up</p>
-                </div>
-                </div>
-            ) : (
-                <div className={styles.attendingCard}>
-                  <h2>Attending</h2>
-                  <div className={styles.attendingCard}>
-                <h2>Attending</h2>
+              ) : (
                 <p>{currentAttendees.length} people have signed up</p>
-                </div>
               )}
             </div>
-            {successMessage && (
-              <p className={styles.errors}>*{successMessage}</p>
-              </div>
-            )}
           </div>
         </div>
       </div>
