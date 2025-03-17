@@ -1,7 +1,7 @@
 # Cookbook Club App (in development)
 
 ## Tech Stack:
-Backend: Rails API
+Backend: Rails API\
 Frontend: React
 Authentication: Devise
 Database: PostgreSQL
