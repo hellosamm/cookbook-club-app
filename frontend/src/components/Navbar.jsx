@@ -4,6 +4,7 @@ import { useCookies } from "react-cookie";
 import { logoutApi } from "../apis/authentication";
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 import useAuth from "../hooks/useAuth";
+import styles from "../../src/style/Navbar.module.css";
 
 const Navbar = () => {
   const { currentUserData } = useAuth();
@@ -50,8 +51,8 @@ const Navbar = () => {
   return (
     <div>
       {!isForm && (
-        <div className=" max-w-7xl px-2 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center py-3">
+        <div className={styles.navbarContainer}>
+          <div className={styles.navbarContent}>
             <Link to="/">
               <img
                 src="/cbc-green.png"
@@ -59,40 +60,40 @@ const Navbar = () => {
                 style={{ height: "10rem" }}
               />
             </Link>
-            <Link to="allEvents">EVENTS</Link>
+            <Link to="allEvents" className={styles.navLink}>
+              <h2>Events</h2>
+            </Link>
 
             {loggedIn ? (
-              <Menu as="div" className="">
-                <MenuButton className="flex items-center rounded-sm py-1 px-2 uppercase">
-                  @{currentUserData.username || currentUserData.email}
+              <Menu as="div" className={styles.menu}>
+                <MenuButton className={styles.menuButton}>
+                  <div className={styles.navLink}>
+                    <h2>
+                      @{currentUserData.username || currentUserData.email}
+                    </h2>
+                  </div>
                   <img
                     src="/public/down-arrow.png"
                     alt="Dropdown Icon"
                     className="ml-2 w-6 h-6"
                   />
                 </MenuButton>
-                <MenuItems className="transition focus:outline-hidden data-closed:scale-95 data-closed:transform data-closed:opacity-0 data-enter:duration-100 data-enter:ease-out data-leave:duration-75 data-leave:ease-in">
+                <MenuItems className={styles.menuItems}>
                   <div>
                     <MenuItem>
-                      <Link
-                        className="block  bg-ivory text-black rounded-sm py-1 px-2 hover:bg-black hover:text-white  "
-                        to="profile"
-                      >
+                      <Link className={styles.menuItem} to="profile">
                         Profile
                       </Link>
                     </MenuItem>
                     <MenuItem>
-                      <Link
-                        className="block  bg-ivory text-black rounded-sm py-1 px-2 hover:bg-black hover:text-white  "
-                        to="createEvent"
-                      >
+                      <Link className={styles.menuItem} to="createEvent">
                         Create Event
                       </Link>
                     </MenuItem>
                     <MenuItem>
                       <Link
                         to="/"
-                        className=" block  bg-ivory text-black rounded-sm py-1 px-2 hover:bg-black hover:text-white "
+                        className={styles.menuItem}
                         role="menuitem"
                         tabIndex={-1}
                         onClick={async (e) => {
@@ -107,8 +108,10 @@ const Navbar = () => {
                 </MenuItems>
               </Menu>
             ) : (
-              <div className="">
-                <Link to="login">Login</Link>
+              <div className={styles.navLink}>
+                <Link to="login">
+                  <h2>Login</h2>
+                </Link>
               </div>
             )}
           </div>
