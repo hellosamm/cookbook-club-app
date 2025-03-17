@@ -6,6 +6,7 @@
 
 .fullPage {
   margin: 2rem 2.5rem;
+  width: 100%;
   min-width: 1000px;
   max-width: 1400px;
 }
