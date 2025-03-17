@@ -1,3 +1,9 @@
+.viewEvent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .fullPage {
   margin: 2rem 2.5rem;
   min-width: 1000px;
