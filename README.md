@@ -28,12 +28,14 @@ bundle install
 rails db:create db:migrate db:seed
 rails s
 ```
+
 3. Frontend Setup (React)
 ```
 cd frontend
 npm install
 npm start
 ```
+
 4. Open in Browser
 Visit http://localhost:3000 for the Rails API and http://localhost:5173 (or appropriate React port) for the frontend.
 
