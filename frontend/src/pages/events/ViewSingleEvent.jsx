@@ -7,7 +7,7 @@ import {
   cancelSignUp,
   showEventAttendees,
 } from "../../apis/attendees";
-
+import { formatDateTime } from "/src/utilites/formatDateTime.js";
 import useAuth from "../../hooks/useAuth";
 import styles from "../../style/SingleEvent.module.css";
 
@@ -25,6 +25,7 @@ const ViewSingleEvent = () => {
     creator: null,
   });
   const [currentAttendees, setCurrentAttendees] = useState([]);
+  const [formattedTimes, setFormattedTimes] = useState({});
 
   // useEffect(() => {
   //   const fetchEvent = async () => {
@@ -51,11 +52,20 @@ const ViewSingleEvent = () => {
   }, [id, authToken]);
 
   useEffect(() => {
-    console.log("updated attendees array:", currentAttendees);
+    // console.log("updated attendees array:", currentAttendees);
   }, [currentAttendees]);
+
+  useEffect(() => {
+    if (event?.start_time && event?.end_time) {
+      setFormattedTimes(formatDateTime(event.start_time, event.end_time));
+    }
+
+    console.log(formattedTimes);
+  }, [event]);
 
   const fetchEvent = async () => {
     const [result] = await viewSingleEventApi(id);
+    console.log(result);
     setEvent(result.data);
     setMessage(result.message);
   };
@@ -64,14 +74,14 @@ const ViewSingleEvent = () => {
     if (!authToken) return;
 
     const [status] = await checkUserRSVP(authToken, id);
-    console.log(status);
+    // console.log(status);
     setRsvpStatus(status);
   };
 
   const fetchAttendees = async () => {
     const result = await showEventAttendees(authToken, id);
-    console.log("result", result);
-    console.log(result.length);
+    // console.log("result", result);
+    // console.log(result.length);
     // const attendeesArray = result || [];
     setCurrentAttendees(result[0]);
     console.log("currentAttendees array", currentAttendees);
@@ -93,7 +103,7 @@ const ViewSingleEvent = () => {
   };
 
   const allAttendees = currentAttendees.map((attendee) => (
-    <div id={attendee.user_id} key={attendee.user_id} className="flex ">
+    <div id={attendee.user_id} key={attendee.user_id} className="flex">
       <p>@{attendee.first_name || "anonymous user"}</p>
     </div>
   ));
@@ -175,8 +185,10 @@ const ViewSingleEvent = () => {
               </div>
               <div className={styles.singleDetail}>
                 <h2>Time</h2>
-                <p className="m-2">
-                  {event.start_time} - {event.end_time}
+                <p>
+                  {/* {event.start_time} - {event.end_time} */}
+                  {formattedTimes.formattedStartTime} -{" "}
+                  {formattedTimes.formattedEndTime}
                 </p>
               </div>
               {/* {authToken && (
@@ -189,7 +201,7 @@ const ViewSingleEvent = () => {
               )} */}
               <div className={styles.singleDetail}>
                 <h2>Description</h2>
-                <p className="m-2">{event.description}</p>
+                <p>{event.description}</p>
               </div>
             </div>
             <div className={styles.rightColumn}>
@@ -199,7 +211,7 @@ const ViewSingleEvent = () => {
                     <h2>Attending</h2>
                     <p>({currentAttendees.length})</p>
                   </div>
-                  <p>{allAttendees}</p>
+                  {allAttendees}
                 </div>
               ) : currentAttendees.length < 1 ? (
                 <p>nobody has RSVP'd up yet</p>
