@@ -5,9 +5,13 @@ import { viewAllEventsApi } from "../../apis/events";
 import styles from "../../style/AllEvents.module.css";
 import "../../App.css";
 import { formatDateTime } from "../../utilites/formatDateTime";
+import { fetchAttendees } from "../../utilites/fetchAttendees";
+import useAuth from "../../hooks/useAuth";
 
 const AllEvents = () => {
   const [events, setEvents] = useState([]);
+  const [attendees, setAttendees] = useState({});
+  const { authToken } = useAuth();
 
   useEffect(() => {
     const fetchAllEvents = async () => {
@@ -18,11 +22,32 @@ const AllEvents = () => {
         formattedTime: formatDateTime(event.start_time, event.end_time),
       }));
 
+      const attendeesData = await Promise.all(
+        result.map(async (event) => {
+          const attendeesList = await fetchAttendees(authToken, event.id);
+          return {
+            id: event.id,
+            count: Array.isArray(attendeesList) ? attendeesList.length : 0,
+          };
+        })
+      );
+
+      const attendeesObject = attendeesData.reduce((acc, { id, count }) => {
+        acc[id] = count;
+        return acc;
+      }, {});
+
+      //   for (const event of result) {
+      //     const attendeeCount = await fetchAttendees(authToken, id);
+      //     attendeesData[event.id] = attendeeCount;
+      //   }
+      setAttendees(attendeesObject);
+
       setEvents(formattedEvent);
     };
 
     fetchAllEvents();
-  }, []);
+  }, [authToken]);
 
   const allEvents = events.map((event) => (
     <div className={styles.eventCard} id={event.id} key={event.id}>
@@ -40,7 +65,7 @@ const AllEvents = () => {
             </p>
           </div>
           <p>{event.location}</p>
-          <p className={styles.attending}>6 attending</p>
+          <p className={styles.attending}>{attendees[event.id]} attending</p>
         </div>
       </Link>
     </div>

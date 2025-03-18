@@ -10,6 +10,7 @@ import {
 import { formatDateTime } from "/src/utilites/formatDateTime.js";
 import useAuth from "../../hooks/useAuth";
 import styles from "../../style/SingleEvent.module.css";
+import { fetchAttendees } from "../../utilites/fetchAttendees";
 
 const ViewSingleEvent = () => {
   const { id } = useParams();
@@ -48,7 +49,7 @@ const ViewSingleEvent = () => {
   useEffect(() => {
     fetchEvent();
     fetchRSVPStatus();
-    fetchAttendees();
+    // fetchAttendees();
   }, [id, authToken]);
 
   useEffect(() => {
@@ -60,12 +61,20 @@ const ViewSingleEvent = () => {
       setFormattedTimes(formatDateTime(event.start_time, event.end_time));
     }
 
-    console.log(formattedTimes);
+    // console.log(formattedTimes);
   }, [event]);
+
+  useEffect(() => {
+    const getAttendees = async () => {
+      const count = await fetchAttendees(authToken, id);
+      setCurrentAttendees(count);
+    };
+    getAttendees();
+  }, [authToken, id]);
 
   const fetchEvent = async () => {
     const [result] = await viewSingleEventApi(id);
-    console.log(result);
+    // console.log(result);
     setEvent(result.data);
     setMessage(result.message);
   };
@@ -78,14 +87,15 @@ const ViewSingleEvent = () => {
     setRsvpStatus(status);
   };
 
-  const fetchAttendees = async () => {
-    const result = await showEventAttendees(authToken, id);
-    // console.log("result", result);
-    // console.log(result.length);
-    // const attendeesArray = result || [];
-    setCurrentAttendees(result[0]);
-    console.log("currentAttendees array", currentAttendees);
-  };
+  // moved into fetchAttendees.js utilities file
+  // const fetchAttendees = async () => {
+  //   const result = await showEventAttendees(authToken, id);
+  //   // console.log("result", result);
+  //   // console.log(result.length);
+  //   // const attendeesArray = result || [];
+  //   setCurrentAttendees(result[0]);
+  //   console.log("currentAttendees array", currentAttendees);
+  // };
 
   const handleSignUp = async () => {
     const [result] = await attendeeSignUp(authToken, id);
