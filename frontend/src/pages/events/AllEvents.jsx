@@ -4,6 +4,7 @@ import { viewAllEventsApi } from "../../apis/events";
 // import "../../style/AllEvents.css";
 import styles from "../../style/AllEvents.module.css";
 import "../../App.css";
+import { formatDateTime } from "../../utilites/formatDateTime";
 
 const AllEvents = () => {
   const [events, setEvents] = useState([]);
@@ -12,7 +13,12 @@ const AllEvents = () => {
     const fetchAllEvents = async () => {
       const [result] = await viewAllEventsApi();
 
-      setEvents(result);
+      const formattedEvent = result.map((event) => ({
+        ...event,
+        formattedTime: formatDateTime(event.start_time, event.end_time),
+      }));
+
+      setEvents(formattedEvent);
     };
 
     fetchAllEvents();
@@ -27,7 +33,11 @@ const AllEvents = () => {
             <p className={styles.title}>{event.title}</p>
           </div>
           <div className={styles.dateTime}>
-            <p>thursday, month 9th | 4:30 pm</p>
+            {/* <p>thursday, month 9th | 4:30 pm</p> */}
+            <p>
+              {event.formattedTime.formattedDate} |{" "}
+              {event.formattedTime.formattedStartTime}
+            </p>
           </div>
           <p>{event.location}</p>
           <p className={styles.attending}>6 attending</p>
