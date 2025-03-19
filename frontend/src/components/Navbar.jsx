@@ -59,7 +59,7 @@ const Navbar = () => {
                 alt="cbcLogo"
                 style={{
                   height: "10rem",
-                  minWidth: "10vh",
+                  minWidth: "20vh",
                   objectFit: "contain",
                 }}
               />

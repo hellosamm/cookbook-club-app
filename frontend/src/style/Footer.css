@@ -6,6 +6,7 @@
 
   padding: 7rem 2rem 2rem 2rem;
   color: #f7f6f2;
+  min-width: 10rem;
 }
 .footer-links {
   display: flex;
@@ -31,19 +32,20 @@
 .footer-columns {
   display: flex;
   justify-content: space-between;
-
   align-items: end;
+  flex-wrap: wrap;
 }
 
 .left-column {
   white-space: nowrap;
-  margin-right: 10rem;
 }
 
 .right-column {
   display: flex;
-  justify-content: end;
+  justify-content: space-between;
   align-items: end;
+
+  min-width: 10%vh;
 }
 
 .stacked-items {
@@ -54,7 +56,7 @@
 }
 
 .stacked-items:not(:last-child) {
-  margin-right: 10rem;
+  margin-right: 2rem;
 }
 
 .stacked-items a {
@@ -66,4 +68,25 @@
 } */
 .stacked-items p {
   font-size: 14px;
+}
+
+@media (max-width: 768px) {
+  .footer-columns {
+    flex-direction: column;
+    align-items: start;
+    text-align: start;
+  }
+
+  .left-column {
+    margin-bottom: 1rem;
+  }
+
+  .right-column {
+    flex-direction: column;
+    align-items: start;
+  }
+
+  .stacked-items {
+    margin-bottom: 0.5rem;
+  }
 }

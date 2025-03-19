@@ -11,7 +11,12 @@
 }
 
 .backButton {
-  margin-bottom: 2rem !important;
+  margin-bottom: 2rem;
+}
+
+.backButton:hover {
+  color: #828f25;
+  font-weight: 600;
 }
 
 .fullPage a:hover {
