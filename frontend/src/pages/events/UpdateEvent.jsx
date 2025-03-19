@@ -116,7 +116,7 @@ const UpdateEvent = () => {
       <div className={styles.fullPage}>
         <div className={styles.header}>
           <div className={styles.leftHeader}>
-            <Link to={`/${event}/event/${event.id}`}>back</Link>
+            <Link to={`/profile/manageEvents`}>back</Link>
             <h1>{event.title}</h1>
           </div>
           <button onClick={handleSubmit} id="button-2">
@@ -151,7 +151,7 @@ const UpdateEvent = () => {
           </div>
           <div className={styles.inputBlock}>
             <h2>Description</h2>
-            <input
+            <textarea
               name="description"
               type="text"
               // placeholder="title"

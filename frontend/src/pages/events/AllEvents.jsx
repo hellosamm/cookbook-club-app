@@ -9,23 +9,45 @@ import { fetchAttendees } from "../../utilites/fetchAttendees";
 import useAuth from "../../hooks/useAuth";
 
 const AllEvents = () => {
-  const [events, setEvents] = useState([]);
-  const [attendees, setAttendees] = useState({});
   const { authToken } = useAuth();
+  const [upcomingEventsList, setUpcomingEventsList] = useState([]);
+  const [pastEventsList, setPastEventsList] = useState([]);
+  const [attendees, setAttendees] = useState({});
+  const [showPastEvents, setShowPastEvents] = useState(false);
 
   useEffect(() => {
     const fetchAllEvents = async () => {
       const [result] = await viewAllEventsApi();
 
-      const formattedEvent = result
-        .map((event) => ({
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+
+      const upcomingEvents = [];
+      const pastEvents = [];
+
+      result.forEach((event) => {
+        const formattedEvent = {
           ...event,
           formattedTime: formatDateTime(event.start_time, event.end_time),
-        }))
-        .sort((a, b) => new Date(a.start_time) - new Date(b.start_time));
+        };
+
+        if (new Date(event.start_time) >= today) {
+          upcomingEvents.push(formattedEvent);
+        } else {
+          pastEvents.push(formattedEvent);
+        }
+      });
+
+      upcomingEvents.sort(
+        (a, b) => new Date(a.start_time) - new Date(b.start_time)
+      );
+
+      pastEvents.sort(
+        (a, b) => new Date(b.start_time) - new Date(a.start_time)
+      );
 
       const attendeesData = await Promise.all(
-        result.map(async (event) => {
+        upcomingEvents.map(async (event) => {
           const attendeesList = await fetchAttendees(authToken, event.id);
           return {
             id: event.id,
@@ -45,13 +67,14 @@ const AllEvents = () => {
       //   }
       setAttendees(attendeesObject);
 
-      setEvents(formattedEvent);
+      setUpcomingEventsList(upcomingEvents);
+      setPastEventsList(pastEvents);
     };
 
     fetchAllEvents();
   }, [authToken]);
 
-  const allEvents = events.map((event) => (
+  const allEvents = upcomingEventsList.map((event) => (
     <div className={styles.eventCard} id={event.id} key={event.id}>
       <Link to={`/${event.title.replace(/\s+/g, "-")}/event/${event.id}`}>
         <div className={styles.imageContainer}></div>
@@ -73,6 +96,32 @@ const AllEvents = () => {
     </div>
   ));
 
+  const pastEvents = pastEventsList.map((event) => (
+    <div className={styles.eventCard} id={event.id} key={event.id}>
+      <Link to={`/${event.title.replace(/\s+/g, "-")}/event/${event.id}`}>
+        <div className={styles.imageContainer}></div>
+        <div className={styles.individualEvent}>
+          <div>
+            <p className={styles.title}>{event.title}</p>
+          </div>
+          <div className={styles.dateTime}>
+            {/* <p>thursday, month 9th | 4:30 pm</p> */}
+            <p>
+              {event.formattedTime.formattedDate} |{" "}
+              {event.formattedTime.formattedStartTime}
+            </p>
+          </div>
+          <p>{event.location}</p>
+          <p className={styles.attending}>{attendees[event.id]} attending</p>
+        </div>
+      </Link>
+    </div>
+  ));
+
+  const displayPastEvents = () => {
+    setShowPastEvents(!showPastEvents);
+  };
+
   const noEvents = (
     <div>
       <p>no events available</p>
@@ -91,8 +140,23 @@ const AllEvents = () => {
       </div>
 
       <div className={styles.allEvents}>
-        {events.length > 0 ? allEvents : noEvents}{" "}
+        {upcomingEventsList.length > 0 ? allEvents : noEvents}{" "}
       </div>
+
+      <div className={styles.pastEvents}>
+        <h1>past events</h1>
+        <img
+          src="/public/down-arrow.png"
+          alt="Dropdown Icon"
+          className="w-10 h-10"
+          onClick={displayPastEvents}
+        />
+      </div>
+      {showPastEvents && (
+        <div className={styles.allEvents}>
+          {pastEventsList.length > 0 ? pastEvents : noEvents}{" "}
+        </div>
+      )}
     </div>
   );
 };
