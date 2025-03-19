@@ -90,6 +90,7 @@ form .inputBlock:last-of-type {
 
 .errors {
   color: #eb7536;
+  font-style: italic;
   font-weight: 500;
   font-size: 14px;
   padding-top: 10px;
