@@ -57,7 +57,11 @@ const Navbar = () => {
               <img
                 src="/cbc-green.png"
                 alt="cbcLogo"
-                style={{ height: "10rem" }}
+                style={{
+                  height: "10rem",
+                  minWidth: "10vh",
+                  objectFit: "contain",
+                }}
               />
             </Link>
             <Link to="allEvents" className={styles.navLink}>

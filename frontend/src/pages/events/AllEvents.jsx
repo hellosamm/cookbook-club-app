@@ -17,10 +17,12 @@ const AllEvents = () => {
     const fetchAllEvents = async () => {
       const [result] = await viewAllEventsApi();
 
-      const formattedEvent = result.map((event) => ({
-        ...event,
-        formattedTime: formatDateTime(event.start_time, event.end_time),
-      }));
+      const formattedEvent = result
+        .map((event) => ({
+          ...event,
+          formattedTime: formatDateTime(event.start_time, event.end_time),
+        }))
+        .sort((a, b) => new Date(a.start_time) - new Date(b.start_time));
 
       const attendeesData = await Promise.all(
         result.map(async (event) => {

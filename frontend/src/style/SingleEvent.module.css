@@ -7,8 +7,16 @@
 .fullPage {
   margin: 2rem 2.5rem;
   width: 100%;
-  min-width: 1000px;
   max-width: 1400px;
+}
+
+.backButton {
+  margin-bottom: 2rem !important;
+}
+
+.fullPage a:hover {
+  color: #828f25;
+  font-weight: 600;
 }
 
 .eventCard {

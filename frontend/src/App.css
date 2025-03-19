@@ -15,6 +15,7 @@ main {
   border-radius: 1rem;
   padding: 2px 6px;
   margin: 5px;
+  white-space: nowrap;
 }
 
 #button-2 {
@@ -23,6 +24,7 @@ main {
   border: 2px solid #828f25;
   border-radius: 1.25rem;
   padding: 0.25rem 0.75rem;
+  white-space: nowrap;
 }
 
 #button-2:hover {
@@ -39,6 +41,7 @@ main {
   border: 2px solid #828f25;
   border-radius: 1.25rem;
   padding: 0.5rem 1rem;
+  white-space: nowrap;
 }
 
 #button-3:hover {

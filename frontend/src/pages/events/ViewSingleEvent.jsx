@@ -153,7 +153,9 @@ const ViewSingleEvent = () => {
   return (
     <div className={styles.viewEvent}>
       <div className={styles.fullPage}>
-        {/* <Link to={"/allEvents"}>back</Link> */}
+        <div className={styles.backButton}>
+          <Link to={"/allEvents"}>back</Link>
+        </div>
         <div className={styles.image}></div>
         <div className={styles.eventCard}>
           <div className={styles.header}>
@@ -191,7 +193,7 @@ const ViewSingleEvent = () => {
             <div className={styles.leftColumn}>
               <div className={styles.singleDetail}>
                 <h2>Location</h2>
-                <p>@{event.location}</p>
+                <p>{event.location}</p>
               </div>
               <div className={styles.singleDetail}>
                 <h2>Time</h2>
