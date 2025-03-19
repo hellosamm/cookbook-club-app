@@ -153,9 +153,12 @@ const ViewSingleEvent = () => {
   return (
     <div className={styles.viewEvent}>
       <div className={styles.fullPage}>
-        <div className={styles.backButton}>
+        {/* <div className={styles.backButton}>
           <Link to={"/allEvents"}>back</Link>
-        </div>
+        </div> */}
+        <button className={styles.backButton} onClick={() => navigate(-1)}>
+          back
+        </button>
         <div className={styles.image}></div>
         <div className={styles.eventCard}>
           <div className={styles.header}>
