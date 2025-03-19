@@ -3,6 +3,7 @@ import { showUserEvents } from "../../apis/attendees";
 import useAuth from "../../hooks/useAuth";
 import { Link } from "react-router-dom";
 import styles from "../../style/ManageEvents.module.css";
+import { formatDateTime } from "../../utilites/formatDateTime";
 
 const ViewUpcomingEvents = () => {
   const { authToken } = useAuth();
@@ -11,8 +12,16 @@ const ViewUpcomingEvents = () => {
   useEffect(() => {
     const fetchUserEvents = async () => {
       const [result] = await showUserEvents(authToken);
+      console.log("result:", result);
 
-      setUserEvents(result.data);
+      const formattedEvent = result.data
+        .map((event) => ({
+          ...event,
+          formattedTime: formatDateTime(event.start_time, event.end_time),
+        }))
+        .sort((a, b) => new Date(a.start_time) - new Date(b.start_time));
+
+      setUserEvents(formattedEvent);
     };
 
     fetchUserEvents();
@@ -28,10 +37,13 @@ const ViewUpcomingEvents = () => {
               <p className={styles.title}>{event.title}</p>
             </div>
             <div className={styles.dateTime}>
-              <p>thursday, month 9th | 4:30 pm</p>
+              <p>
+                {event.formattedTime.formattedDate} |{" "}
+                {event.formattedTime.formattedStartTime}
+              </p>
             </div>
-            <p>{event.location}</p>
-            <p className={styles.attending}>6 attending</p>
+            {/* <p>{event.location}</p>
+            <p className={styles.attending}>6 attending</p> */}
           </div>
         </Link>
       </div>

@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { viewAllEventsApi } from "../../apis/events";
 import useAuth from "../../hooks/useAuth";
 import styles from "../../style/ManageEvents.module.css";
+import { formatDateTime } from "../../utilites/formatDateTime";
 
 export default function UserCreatedEvents() {
   const [events, setEvents] = useState([]);
@@ -12,7 +13,24 @@ export default function UserCreatedEvents() {
     const fetchAllEvents = async () => {
       const [result] = await viewAllEventsApi();
 
-      setEvents(result);
+      const formattedEvent = result
+        .map((event) => ({
+          ...event,
+          formattedTime: formatDateTime(event.start_time, event.end_time),
+        }))
+        .sort((a, b) => new Date(a.start_time) - new Date(b.start_time));
+
+      // const attendeesData = await Promise.all(
+      //   result.map(async (event) => {
+      //     const attendeesList = await fetchAttendees(authToken, event.id);
+      //     return {
+      //       id: event.id,
+      //       count: Array.isArray(attendeesList) ? attendeesList.length : 0,
+      //     };
+      //   })
+      // );
+
+      setEvents(formattedEvent);
     };
 
     fetchAllEvents();
@@ -25,7 +43,7 @@ export default function UserCreatedEvents() {
   // const userCreatedEvents.sort((a, b) => new Date(b.date) - new Date(a.date))
 
   const displayEvents = userCreatedEvents.map((event) => (
-    <div id={event} key={event}>
+    <div id={event.id} key={event.id}>
       <Link to={`/${event.title.replace(/\s+/g, "-")}/event/${event.id}`}>
         <div className={styles.eventCard}>
           <div className={styles.imageContainer}></div>
@@ -34,10 +52,13 @@ export default function UserCreatedEvents() {
               <p className={styles.title}>{event.title}</p>
             </div>
             <div className={styles.dateTime}>
-              <p>thursday, month 9th | 4:30 pm</p>
+              <p>
+                {event.formattedTime.formattedDate} |{" "}
+                {event.formattedTime.formattedStartTime}
+              </p>
             </div>
-            <p>{event.location}</p>
-            <p className={styles.attending}>6 attending</p>
+            {/* <p>{event.location}</p> */}
+            {/* <p className={styles.attending}>6 attending</p> */}
           </div>
         </div>
       </Link>
