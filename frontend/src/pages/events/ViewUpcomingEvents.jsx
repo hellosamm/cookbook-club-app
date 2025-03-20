@@ -72,7 +72,9 @@ const ViewUpcomingEvents = () => {
         <button id="button-4">All Events</button>
       </div>
       {/* <h1>your upcoming events</h1> */}
-      {allEvents.length > 0 ? allEvents : noEvents}
+      <div className={styles.allEvents}>
+        {allEvents.length > 0 ? allEvents : noEvents}
+      </div>
     </div>
   );
 };
