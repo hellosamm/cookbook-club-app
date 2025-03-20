@@ -35,6 +35,15 @@
   font-weight: 600;
 }
 
+.backButton {
+  margin-bottom: 2rem;
+}
+
+.backButton:hover {
+  color: #828f25;
+  font-weight: 600;
+}
+
 .form {
   padding: 1rem;
   border: solid 2px;

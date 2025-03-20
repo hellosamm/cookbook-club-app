@@ -116,7 +116,7 @@ const UpdateEvent = () => {
       <div className={styles.fullPage}>
         <div className={styles.header}>
           <div className={styles.leftHeader}>
-            <Link to={`/profile/manageEvents`}>back</Link>
+            {/* <Link to={`/profile/manageEvents`}>back</Link> */}
             <h1>{event.title}</h1>
           </div>
           <button onClick={handleSubmit} id="button-2">

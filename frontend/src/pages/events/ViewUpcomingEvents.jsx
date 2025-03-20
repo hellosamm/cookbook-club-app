@@ -64,7 +64,13 @@ const ViewUpcomingEvents = () => {
     //     <p>event date</p>
     //   </div>
     // </div>
+
     <div className={styles.fullPage}>
+      <div className={styles.selectorButtons}>
+        <button id="button-4">Upcoming Events</button>
+        <button id="button-4">Past Events</button>
+        <button id="button-4">All Events</button>
+      </div>
       {/* <h1>your upcoming events</h1> */}
       {allEvents.length > 0 ? allEvents : noEvents}
     </div>

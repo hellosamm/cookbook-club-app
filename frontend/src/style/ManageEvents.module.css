@@ -38,3 +38,17 @@
 .title {
   font-weight: 750;
 }
+
+.backButton {
+  margin-bottom: 2rem;
+}
+
+.backButton:hover {
+  color: #828f25;
+  font-weight: 600;
+}
+
+.selectorButtons {
+  display: flex;
+  margin-bottom: 2rem;
+}

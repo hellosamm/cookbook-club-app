@@ -74,6 +74,11 @@ export default function UserCreatedEvents() {
   return (
     <div className={styles.fullPage}>
       {/* <h1>events you created</h1> */}
+      <div className={styles.selectorButtons}>
+        <button id="button-4">Upcoming Events</button>
+        <button id="button-4">Past Events</button>
+        <button id="button-4">All Events</button>
+      </div>
 
       <div className={styles.allEvents}>
         {userCreatedEvents.length > 0 ? displayEvents : noEvents}
