@@ -38,7 +38,7 @@ const Profile = () => {
           }`}
         >
           <Link to="/profile/upcomingEvents">
-            <h2>Upcoming Events</h2>
+            <h2>Events Calendar</h2>
             <p>(events you RSVP'd to)</p>
           </Link>
         </div>
