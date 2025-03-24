@@ -8,6 +8,12 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
+users = User.create!([
+  {email: "test1@test.com", password: "123456"},
+  {email: "test2@test.com", password: "123456"},
+  {email: "test3@test.com", password: "123456"}
+])
+
 
 Event.create!([
   {title: "Sewing Night", 
