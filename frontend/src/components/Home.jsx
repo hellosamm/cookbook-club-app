@@ -15,7 +15,7 @@ const Home = () => {
           </div>
           <button
             className="mt-5 text-sm md:text-l lg:text-xl text-[#828F25] rounded-[1.5625rem] border-[3px] border-[#828F25] bg-[#F7F6F2] px-6 py-2 "
-            onClick={() => navigate("/AllEvents")}
+            onClick={() => navigate("/allEvents")}
           >
             find an event near you
           </button>

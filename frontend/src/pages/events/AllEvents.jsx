@@ -17,6 +17,8 @@ const AllEvents = () => {
 
   useEffect(() => {
     const fetchAllEvents = async () => {
+      console.log("API URL:", process.env.REACT_APP_API_URL);
+
       const [result] = await viewAllEventsApi();
 
       const today = new Date();
