@@ -1,2 +1,2 @@
-export const DOMAIN = "http://localhost:3000";
+export const DOMAIN = "https://cookbook-club-rails-api.onrender.com";
 export const APIV1 = "/api/v1";
