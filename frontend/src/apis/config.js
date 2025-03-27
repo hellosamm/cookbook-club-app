@@ -1,2 +1,2 @@
-export const DOMAIN = process.env.REACT_APP_API_URL;
+export const DOMAIN = "http://localhost:3000";
 export const APIV1 = "/api/v1";
