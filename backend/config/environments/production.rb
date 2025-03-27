@@ -90,14 +90,6 @@ Rails.application.configure do
   # 
   #
   #
-  #Rails.application.config.middleware.insert_before 0, Rack::Cors do
-  config.middleware.insert_before 0, Rack::Cors do
-    allow do
-      origins 'https://cookbook-club-app.onrender.com'
-      resource '*',
-        headers: :any,
-        expose: ['access-token', 'expiry', 'token-type', 'Authorization'],
-        methods: [:get, :post, :put, :patch, :delete, :options, :show]
-      end
-    end
+
+
 end
