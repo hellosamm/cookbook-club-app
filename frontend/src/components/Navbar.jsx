@@ -77,7 +77,7 @@ const Navbar = () => {
                     </h2>
                   </div>
                   <img
-                    src="/public/down-arrow.png"
+                    src="./down-arrow.png"
                     alt="Dropdown Icon"
                     className="ml-2 w-6 h-6"
                   />
