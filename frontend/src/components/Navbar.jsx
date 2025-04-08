@@ -21,7 +21,7 @@ const Navbar = () => {
     if (cookies.authToken) {
       // set state to logged in
       setLoggedIn(true);
-      console.log("sign in state:", cookies.authToken);
+      // console.log("sign in state:", cookies.authToken);
     }
   }, [cookies.authToken]);
 

@@ -43,7 +43,7 @@ export const loginApi = async (userData) => {
       console.log("response was successful");
 
       const authToken = response.headers.get("Authorization");
-      console.log(authToken);
+      // console.log(authToken);
 
       return [result, authToken, ""];
     } else if (response.status == 401) {
