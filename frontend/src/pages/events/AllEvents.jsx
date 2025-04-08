@@ -132,11 +132,13 @@ const AllEvents = () => {
     <div className={styles.fullPage}>
       <div className={styles.header}>
         <h1>upcoming events</h1>
-        <div>
-          <Link to="/createEvent" id="button-2">
-            create an event
-          </Link>
-        </div>
+        {authToken && (
+          <div>
+            <Link to="/createEvent" id="button-2">
+              create an event
+            </Link>
+          </div>
+        )}
       </div>
 
       <div className={styles.allEvents}>

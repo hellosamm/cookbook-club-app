@@ -1,7 +1,7 @@
 class Api::V1::AttendeesController < ApplicationController
   # before_action :set_attendee, only: %i[destroy]
   # before_action :authorize_user, only: %i[destroy]
-  # before_action :authenticate_user!, only: %i[destroy, create]
+  # before_action :authenticate_user!, only: %i[create]
 
   def create
     @attendee = current_user.attendees.build(attendee_params)
