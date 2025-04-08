@@ -13,7 +13,7 @@ class Api::V1::AttendeesController < ApplicationController
     end
   end
 
-  def show
+  def user_events
 
   events = Event.joins(:attendees).where(attendees: { user_id: current_user.id }).uniq
 
