@@ -36,14 +36,16 @@ const Home = () => {
         </div>
         <div className="bg-[#828F25]">
           <div className="p-10 text-lg text-[#F7F6F2]">
-            <div>
+            <div className="mb-5">
               <h1>Welcome to Cookbook Club!</h1>{" "}
               <p>
                 Love good food and great company? Cookbook Club is a fun, casual
                 space where food lovers gather once a month to share delicious
                 dishes, swap cooking tips, and celebrate all things tasty.
               </p>
-              <h2> How It Works:</h2>
+            </div>
+            <div>
+              <h1> How It Works:</h1>
               <p>1. We pick a theme.</p>
               <p>
                 {" "}
