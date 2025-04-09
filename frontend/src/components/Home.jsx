@@ -35,9 +35,9 @@ const Home = () => {
           />
         </div>
         <div className="bg-[#828F25]">
-          <div className="p-10 text-lg text-[#F7F6F2]">
+          <div className="p-10 text-lg text-[#F7F6F2] leading-none">
             <div className="mb-5">
-              <h1>Welcome to Cookbook Club!</h1>{" "}
+              <h1 className="mb-1.5">Welcome to Cookbook Club!</h1>{" "}
               <p>
                 Love good food and great company? Cookbook Club is a fun, casual
                 space where food lovers gather once a month to share delicious
@@ -46,22 +46,24 @@ const Home = () => {
             </div>
             <div>
               <div className="mb-5">
-                <h1> How It Works:</h1>
-                <p className="mb-3">
-                  1. We pick a theme- it could be a seasonal favorite, a new
-                  cookbook, or a fun challenge (comfort food, global flavors,
-                  one-pot wonders—you name it!).
-                </p>
-                <p></p>
-                <p className="mb-3">
-                  2. You choose a dish. Find a recipe that fits the theme and
-                  whip it up in your kitchen.
-                </p>
-                <p>
-                  3. We meet, eat, and share! Bring your dish to our monthly
-                  meetup, enjoy a feast of flavors, and chat about what worked,
-                  what flopped, and what we’re making next.
-                </p>
+                <h1 className="mb-1.5"> How It Works:</h1>
+                <div>
+                  <p className="mb-3">
+                    1. We pick a theme- it could be a seasonal favorite, a new
+                    cookbook, or a fun challenge (comfort food, global flavors,
+                    one-pot wonders—you name it!).
+                  </p>
+                  <p></p>
+                  <p className="mb-3">
+                    2. You choose a dish. Find a recipe that fits the theme and
+                    whip it up in your kitchen.
+                  </p>
+                  <p>
+                    3. We meet, eat, and share! Bring your dish to our monthly
+                    meetup, enjoy a feast of flavors, and chat about what
+                    worked, what flopped, and what we’re making next.
+                  </p>
+                </div>
               </div>
               <div>
                 <p>
