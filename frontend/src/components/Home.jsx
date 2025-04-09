@@ -47,24 +47,23 @@ const Home = () => {
             <div>
               <div className="mb-5">
                 <h1> How It Works:</h1>
-                <p className="mb-3">1. We pick a theme.</p>
-                <p>
-                  It could be a seasonal favorite, a new cookbook, or a fun
-                  challenge (comfort food, global flavors, one-pot wonders—you
-                  name it!).
+                <p className="mb-3">
+                  1. We pick a theme- it could be a seasonal favorite, a new
+                  cookbook, or a fun challenge (comfort food, global flavors,
+                  one-pot wonders—you name it!).
                 </p>
+                <p></p>
                 <p className="mb-3">
                   2. You choose a dish. Find a recipe that fits the theme and
                   whip it up in your kitchen.
                 </p>
-                <p>3. We meet, eat, and share!</p>
+                <p>
+                  3. We meet, eat, and share! Bring your dish to our monthly
+                  meetup, enjoy a feast of flavors, and chat about what worked,
+                  what flopped, and what we’re making next.
+                </p>
               </div>
               <div>
-                <p className="mb-5">
-                  Bring your dish to our monthly meetup, enjoy a feast of
-                  flavors, and chat about what worked, what flopped, and what
-                  we’re making next.
-                </p>
                 <p>
                   No fancy chef skills required—just a love for food and a
                   willingness to try new things! Sign up for our next event and
