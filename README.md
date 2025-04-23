@@ -43,12 +43,11 @@ Visit http://localhost:3000 for the Rails API and http://localhost:5173 (or appr
 ## Images
 
 <img width="1413" alt="Image" src="https://github.com/user-attachments/assets/62cb41f3-0f86-4665-999c-389bf7d23161" />
-homepage
-<br>
-
+homepage  
+<br>  
 <img width="1424" alt="Image" src="https://github.com/user-attachments/assets/f3c14f70-c6c6-42d0-9013-4a71b95091d3" />
-sign in page
-<br>
+sign in page  
+<br>  
 <img width="947" alt="Image" src="https://github.com/user-attachments/assets/cb6b3dbc-3250-449f-8a3d-b8180530247f" />
 create an event
 <br>
