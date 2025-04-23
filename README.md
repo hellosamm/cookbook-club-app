@@ -1,5 +1,6 @@
 # Cookbook Club App (in development)
-⚠️ Note: This project is currently experiencing several issues following deployment. I'm actively working on resolving them, stay tuned for updates!
+> [!IMPORTANT]
+> Note: This project is currently experiencing several issues following deployment. I'm actively working on resolving them, stay tuned for updates!
 
 ## Tech Stack:
 Backend: Rails API\
@@ -43,8 +44,7 @@ Visit http://localhost:3000 for the Rails API and http://localhost:5173 (or appr
 ## Images
 
 <img width="1413" alt="Image" src="https://github.com/user-attachments/assets/62cb41f3-0f86-4665-999c-389bf7d23161" />
-homepage  
-<br>  
+homepage<br>  
 <img width="1424" alt="Image" src="https://github.com/user-attachments/assets/f3c14f70-c6c6-42d0-9013-4a71b95091d3" />
 sign in page  
 <br>  
