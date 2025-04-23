@@ -47,7 +47,7 @@ Visit http://localhost:3000 for the Rails API and http://localhost:5173 (or appr
 
 
 <img width="1424" alt="Image" src="https://github.com/user-attachments/assets/f3c14f70-c6c6-42d0-9013-4a71b95091d3" />
-sign in page <img width="947" alt="Image" src="https://github.com/user-attachments/assets/cb6b3dbc-3250-449f-8a3d-b8180530247f" />
+<img width="947" alt="Image" src="https://github.com/user-attachments/assets/cb6b3dbc-3250-449f-8a3d-b8180530247f" />
 
 
 <img width="1735" alt="Image" src="https://github.com/user-attachments/assets/574acc03-5819-4f1d-8c12-5e1daa4eadbf" />
