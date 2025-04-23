@@ -1,6 +1,6 @@
 # Cookbook Club App (in development)
 > [!IMPORTANT]
-> Note: This project is currently experiencing several issues following deployment. I'm actively working on resolving them, stay tuned for updates!
+> Note: This project is currently experiencing several issues following deployment. I'm actively working on resolving them, stay tuned for updates.
 
 ## Tech Stack:
 Backend: Rails API\
