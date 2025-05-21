@@ -1,7 +1,8 @@
 # Cookbook Club App (in development)
 > [!IMPORTANT]
 > Note: has been redeployed in a new repository and is now fully functional there.
-> Please visit the new, active project here: https://cbc-v2.onrender.com
+> Please visit the new, active project here: 
+> https://github.com/hellosamm/cbc-v2
 
 ## Tech Stack:
 Backend: Rails API\
